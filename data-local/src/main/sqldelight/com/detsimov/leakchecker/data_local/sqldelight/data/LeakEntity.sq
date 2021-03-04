@@ -1,0 +1,20 @@
+import com.detsimov.leakchecker.domain.models.TrackDataModel;
+
+CREATE TABLE Leak (
+		id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+		data TEXT NOT NULL,
+		last_breach TEXT,
+		source TEXT,
+		from_line TEXT NOT NULL,
+		from_line_type TEXT AS TrackDataModel.TypeValue NOT NULL
+);
+
+all: SELECT * FROM Leak;
+
+add: INSERT OR REPLACE INTO Leak(data, last_breach, source, from_line, from_line_type) VALUES(?,?,?,?,?);
+
+lastId: SELECT last_insert_rowid();
+
+delete: DELETE FROM Leak WHERE id=?;
+
+clear: DELETE FROM Leak;

@@ -1,0 +1,25 @@
+import com.detsimov.leakchecker.datalocal.sqldelight.data.TrackData;
+import com.detsimov.leakchecker.domain.models.TrackDataModel;
+import java.lang.Boolean;
+
+CREATE TABLE TrackData (
+	id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	value TEXT NOT NULL,
+	type TEXT AS TrackDataModel.TypeValue NOT NULL,
+	period TEXT AS TrackDataModel.Period NOT NULL,
+	last_check INTEGER,
+	isActivate INTEGER AS Boolean DEFAULT 1
+);
+
+updateLastCheck: UPDATE TrackData SET last_check = ? WHERE id = ?;
+
+all: SELECT * FROM TrackData;
+
+add: INSERT OR REPLACE INTO TrackData(value, type, period) VALUES(?,?,?);
+
+lastId: SELECT last_insert_rowid();
+
+delete: DELETE FROM TrackData WHERE id=?;
+
+clear: DELETE FROM TrackData;
+

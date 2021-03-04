@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "328645759160",
+    "project_id": "leakchecker-bc8ae",
+    "storage_bucket": "leakchecker-bc8ae.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:328645759160:android:32276c5ffc1de978e3e44d",
+        "android_client_info": {
+          "package_name": "com.detsimov.leakchecker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "328645759160-74ecttq8h4app57n9dd1k6p8i6kr92iu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMX_xJY5LCV8XDxNBUY8Ni7LP80fZ-ERY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "328645759160-74ecttq8h4app57n9dd1k6p8i6kr92iu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

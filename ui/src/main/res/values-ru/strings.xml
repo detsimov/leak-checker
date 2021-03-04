@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Leak checker</string>
+
+    <!-- Строки Leak Feature -->
+    <string name="leak_master_title">Утечки</string>
+    <string name="leak_item_title_without_data">Дополнительных данных нету</string>
+    <string name="leak_item_breach">Дата утечки: %1$s</string>
+    <string name="leak_item_source">Источник: %1$s</string>
+
+    <!-- Строки Settings Feature -->
+    <string name="settings_master_title">Настройки</string>
+    <string name="settings_master_title_token">Токен доступа</string>
+    <string name="settings_master_title_app_info">О приложении</string>
+    <string name="settings_master_app_info">Версия %1$s, сборка %2$d</string>
+    <string name="settings_master_error_token">Произошла ошибка при изъятии токена</string>
+
+    <!-- Строки TrackData Feature -->
+    <string name="track_data_master_title">Трэкеры</string>
+    <string name="track_data_create_title">Трэкер</string>
+    <string name="track_data_create_title_type">Тип данных</string>
+    <string name="track_data_create_title_data">Данные</string>
+    <string name="track_data_master_title_dialog_clear_all">Трэкеры</string>
+    <string name="track_data_create_btn_add">Добавить</string>
+    <string name="track_data_master_message_dialog_clear_all">Вы действительно хотите удалить все данные?</string>
+    <string name="track_data_master_btn_ok_dialog_clear_all">Ок</string>
+    <string name="track_data_master_btn_cancel_dialog_clear_all">Отмена</string>
+    <string name="track_data_master_title_dialog_delete">Трэкер</string>
+    <string name="track_data_master_message_dialog_delete">Вы действительно хотите удалить\n <b>%1$s (%2$s)</b>?</string>
+    <string name="track_data_master_btn_ok_dialog_delete">Ок</string>
+    <string name="track_data_master_btn_cancel_dialog_delete">Отмена</string>
+    <string name="track_data_item_last_check">Последняя проверка: %1$s</string>
+    <string name="track_data_item_last_check_default">Не было</string>
+    <string name="track_data_master_error_overflow">Максимально допустимое число трэкеров три</string>
+    <string name="track_data_create_error_email">Email введён некорректно</string>
+    <string name="track_data_create_error_phone">Номер телефона введён некорректно</string>
+
+    <!-- Строки Splash Feature -->
+    <string name="splash_title">Leak checker\n version 1.0</string>
+
+
+    <array name="test_spinner_items">
+        <item>Item1</item>
+    </array>
+    <string name="track_data_create_warning_phone">Поддерживаются только Российские номера</string>
+
+</resources>

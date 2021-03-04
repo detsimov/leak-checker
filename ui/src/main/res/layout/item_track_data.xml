@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/item_track_data"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+    android:background="@drawable/bg_list"
+    android:foreground="@drawable/bg_ripple_list"
+    android:padding="7dp">
+
+
+    <ImageView
+        android:id="@+id/imgType"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/bg_icon"
+        android:padding="5dp"
+        android:src="@drawable/ic_baseline_local_phone_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="?colorOnPrimary" />
+
+
+    <TextView
+        android:id="@+id/tvData"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:ellipsize="end"
+        android:lines="1"
+        android:textColor="?colorOnPrimary"
+        android:textSize="15.5sp"
+        app:layout_constraintBottom_toBottomOf="@id/imgType"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/imgType"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="privetgeubu1@gmail.com" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/tvData">
+
+        <TextView
+            android:id="@+id/tvLastCheckDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="25dp"
+            android:drawablePadding="5dp"
+            android:ellipsize="end"
+            android:lines="1"
+            android:gravity="start|center"
+            tools:text="Последняя проверка: 5 Января 2020г"
+            android:textSize="12sp"
+            app:drawableLeftCompat="@drawable/ic_baseline_access_time_24"
+            app:drawableTint="?colorPrimary" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
