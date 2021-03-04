@@ -1,5 +1,6 @@
 package com.detsimov.leakchecker.domain.interactors
 
+import android.util.Log
 import com.detsimov.leakchecker.domain.interactors.i.ISecureInteractor
 import com.detsimov.leakchecker.domain.models.ScanDataModel
 import com.detsimov.leakchecker.domain.repositories.ILeakRepository
@@ -17,6 +18,7 @@ internal class SecureInteractor(
 
     override suspend fun fullScan(): ScanDataModel = withContext(Dispatchers.IO) {
         val trackData = trackDataRepository.fetch().filter { it.isCanScan() }
+
 
         val leaks = leakRepository.fetch()
 

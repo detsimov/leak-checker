@@ -11,7 +11,7 @@ CREATE TABLE Leak (
 
 all: SELECT * FROM Leak;
 
-add: INSERT OR REPLACE INTO Leak(data, last_breach, source, from_line, from_line_type) VALUES(?,?,?,?,?);
+add: INSERT INTO Leak(data, last_breach, source, from_line, from_line_type) VALUES(?,?,?,?,?);
 
 lastId: SELECT last_insert_rowid();
 

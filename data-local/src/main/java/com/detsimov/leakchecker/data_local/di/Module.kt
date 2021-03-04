@@ -15,7 +15,7 @@ import org.koin.dsl.module
 val dataModule = module {
 
     /** Network */
-    single { OkHttpProvider(get()).get() }
+    single { OkHttpProvider(get(),get()).get() }
     single { RetrofitProvider(get()).get() }
 
     single { TokenService.create(get()) }

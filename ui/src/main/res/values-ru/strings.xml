@@ -36,7 +36,7 @@
     <string name="track_data_create_error_phone">Номер телефона введён некорректно</string>
 
     <!-- Строки Splash Feature -->
-    <string name="splash_title">Leak checker\n version 1.0</string>
+    <string name="splash_title">Leak checker\n version %1$s</string>
 
 
     <array name="test_spinner_items">

@@ -20,27 +20,32 @@ class StackFragment : Fragment(R.layout.fragment_stack), FragmentScreenContainer
 
     private lateinit var stackInitFragmentFactory: StackInitFragmentFactory
 
+    private val appNavigator by lazy {
+        AppNavigator(
+            requireActivity(),
+            R.id.fragmentContainerView,
+            fragmentManager = childFragmentManager
+        )
+    }
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         stackInitFragmentFactory = requireListener()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        setUpCicerone()
         router.navigateTo(stackInitFragmentFactory.onInitFragment(getStackFromArgument()))
     }
 
 
-    private fun setUpCicerone(){
-        cicerone.apply {
-            getNavigatorHolder().setNavigator(
-                AppNavigator(
-                    requireActivity(),
-                    R.id.fragmentContainerView,
-                    fragmentManager = childFragmentManager
-                )
-            )
-        }
+    override fun onResume() {
+        cicerone.getNavigatorHolder().setNavigator(appNavigator)
+        super.onResume()
+    }
+
+    override fun onPause() {
+        cicerone.getNavigatorHolder().removeNavigator()
+        super.onPause()
     }
 
 

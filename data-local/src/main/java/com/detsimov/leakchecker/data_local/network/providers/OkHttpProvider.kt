@@ -1,5 +1,7 @@
 package com.detsimov.leakchecker.data_local.network.providers
 
+import android.content.Context
+import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.detsimov.core_data.BuildConfig
 import com.detsimov.core_data.Provider
 import com.detsimov.leakchecker.data_local.datasources.TokenDataSource
@@ -8,7 +10,7 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
 
-internal class OkHttpProvider(tokenDataSource: TokenDataSource) : Provider<OkHttpClient> {
+internal class OkHttpProvider(private val context: Context,tokenDataSource: TokenDataSource) : Provider<OkHttpClient> {
 
     private val tokenInterceptor = TokenInterceptor(tokenDataSource)
 
@@ -16,6 +18,7 @@ internal class OkHttpProvider(tokenDataSource: TokenDataSource) : Provider<OkHtt
 
     override fun get(): OkHttpClient =
         OkHttpClient.Builder()
+            .addInterceptor(ChuckerInterceptor.Builder(context).build())
             .addInterceptor(tokenInterceptor)
             .addInterceptor(versionInterceptor)
             .build()

@@ -70,6 +70,7 @@ object Libraries {
         const val compose = "1.0.0-alpha12"
         const val composeNavigation = "1.0.0-alpha07"
         const val activity = "1.3.0-alpha02"
+        const val chucker = "3.4.0"
 
     }
 
@@ -123,6 +124,8 @@ object Libraries {
     private const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
     private const val retrofitConverter = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:${Versions.retrofitConverter}"
     private const val serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.serialization}"
+    private const val chucker = "com.github.chuckerteam.chucker:library:${Versions.chucker}"
+    private const val chuckerNoOp = "com.github.chuckerteam.chucker:library-no-op:${Versions.chucker}"
 
 
     fun DependencyHandler.addCommonDependencies() {
@@ -162,6 +165,8 @@ object Libraries {
 
     fun DependencyHandler.addDataDependencies() {
         dataDependencies.forEach { api(it) }
+        debugImplementation(chucker)
+        releaseImplementation(chuckerNoOp)
     }
 
 
@@ -175,6 +180,10 @@ object Libraries {
 
     private fun DependencyHandler.debugImplementation(depName: Any) {
         add("debugImplementation", depName)
+    }
+
+    private fun DependencyHandler.releaseImplementation(depName: Any) {
+        add("releaseImplementation", depName)
     }
 
     private fun DependencyHandler.kapt(depName: Any) {

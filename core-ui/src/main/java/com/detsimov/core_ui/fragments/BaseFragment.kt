@@ -63,6 +63,7 @@ abstract class BaseFragment<VM : BaseViewModel>(
         super.onDestroyView()
     }
 
+
     override fun onDestroy() {
         log("onDestroy")
         super.onDestroy()

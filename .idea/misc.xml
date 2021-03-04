@@ -6,6 +6,8 @@
         <entry key="..\:/Projects/LeakChecker/ui/src/main/res/drawable/ic_launcher_foreground.xml" value="0.4925925925925926" />
         <entry key="..\:/Projects/LeakChecker/ui/src/main/res/layout/dialog_track_data_create.xml" value="0.47604166666666664" />
         <entry key="..\:/Projects/LeakChecker/ui/src/main/res/layout/fragment_master_leak.xml" value="0.41510416666666666" />
+        <entry key="..\:/Projects/leak-checker/ui/src/main/res/layout/fragment_main_navigation.xml" value="0.5369791666666667" />
+        <entry key="..\:/Projects/leak-checker/ui/src/main/res/layout/fragment_splash.xml" value="0.5369791666666667" />
       </map>
     </option>
   </component>

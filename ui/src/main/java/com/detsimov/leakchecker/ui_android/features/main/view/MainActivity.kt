@@ -18,6 +18,10 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private val cicerone = cicerone<Router>(MainCicerone)
+    private val appNavigator =  AppNavigator(
+        this@MainActivity,
+        R.id.fragmentContainerView
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,14 +33,19 @@ class MainActivity : AppCompatActivity() {
 
     private fun setUpCicerone() {
         cicerone.apply {
-            getNavigatorHolder().setNavigator(
-                AppNavigator(
-                    this@MainActivity,
-                    R.id.fragmentContainerView
-                )
-            )
             router.replaceScreen(Screens.splash())
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        cicerone.getNavigatorHolder().setNavigator(appNavigator)
+
+    }
+
+    override fun onPause() {
+        super.onPause()
+        cicerone.getNavigatorHolder().removeNavigator()
     }
 
 
