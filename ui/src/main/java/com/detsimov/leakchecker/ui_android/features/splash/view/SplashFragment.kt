@@ -22,7 +22,7 @@ class SplashFragment : BaseFragment<SplashViewModel>(R.layout.fragment_splash) {
 
 
     override val viewModel: SplashViewModel by viewModel()
-    
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setUpWorker()

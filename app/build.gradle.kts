@@ -9,15 +9,6 @@ plugins {
 
 
 android {
-
-    signingConfigs {
-        create("release") {
-            storeFile = file("E:\\Projects\\LeakChecker\\keystore.jks")
-            storePassword = "tfwdwyqlgtvarxms"
-            keyPassword = "tfwdwyqlgtvarxms"
-            keyAlias = "leakchecker"
-        }
-    }
     defaultConfig {
         applicationId = "com.detsimov.leakchecker"
         versionCode = App.versionCode
