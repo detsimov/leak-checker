@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <attr name="colorGlobalBackground" format="color"/>
+    <attr name="colorBottomNavigationBackground" format="color"/>
+    <attr name="colorActivatedIconBottomNavigation" format="color"/>
+    <attr name="colorDeactivatedIconBottomNavigation" format="color"/>
     <attr name="colorBackgroundList" format="color"/>
     <attr name="colorError" format="color"/>
 

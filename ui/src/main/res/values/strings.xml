@@ -40,6 +40,13 @@
     <string name="splash_title">Leak checker\n version %1$s</string>
 
 
+    <!-- Строки Уведомлений -->
+    <string name="notification_channel_id_analyse_scan">LeakCheckerAnalyseScan</string>
+    <string name="notification_channel_name_analyse_scan">Analyse notifications</string>
+    <string name="notification_title_analyse_scan">Analyse result</string>
+    <string name="notification_content_analyse_scan">Founded %1$s leaks, security risk!</string>
+
+
     <array name="test_spinner_items">
         <item>Item1</item>
     </array>

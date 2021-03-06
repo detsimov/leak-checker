@@ -21,7 +21,7 @@ val uiModule = module {
     /** ViewModel's */
     viewModel { SplashViewModel(get(), router(MainCicerone)) }
 
-    viewModel { TrackDataMasterViewModel(get()) }
+    viewModel { TrackDataMasterViewModel(get(), get()) }
     viewModel { TrackDataCreateViewModel(get()) }
 
     viewModel { LeakMasterViewModel(get()) }

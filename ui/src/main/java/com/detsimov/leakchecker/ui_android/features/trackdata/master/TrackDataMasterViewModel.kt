@@ -5,6 +5,7 @@ import com.detsimov.core_domain.handleErrors
 import com.detsimov.core_ui.livedata.SingleLiveData
 import com.detsimov.core_ui.livedata.asLiveData
 import com.detsimov.core_ui.viewmodel.BaseViewModel
+import com.detsimov.leakchecker.domain.interactors.i.ISecureInteractor
 import com.detsimov.leakchecker.domain.interactors.i.ITrackDataInteractor
 import com.detsimov.leakchecker.domain.models.TrackDataModel
 import com.detsimov.leakchecker.ui_android.features.trackdata.master.items.TrackDataItem
@@ -13,7 +14,7 @@ import com.detsimov.leakchecker.ui_android.firebase.EVENT
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
-class TrackDataMasterViewModel(private val trackDataInteractor: ITrackDataInteractor) :
+class TrackDataMasterViewModel(private val trackDataInteractor: ITrackDataInteractor, private val secureInteractor: ISecureInteractor) :
     BaseViewModel() {
 
     private val _progressSaveTrackData = MutableLiveData<Boolean>()
@@ -33,6 +34,7 @@ class TrackDataMasterViewModel(private val trackDataInteractor: ITrackDataIntera
 
     private val _clearTrackData = SingleLiveData<Unit>()
     val clearTrackData = _clearTrackData.asLiveData()
+
 
 
     init {
@@ -60,9 +62,11 @@ class TrackDataMasterViewModel(private val trackDataInteractor: ITrackDataIntera
 
     private fun onGetTrackData() {
         trackDataInteractor.ownDataFlow
-            .map { array -> array.map { TrackDataItem(it) } }
+            .onStart { _progress.value = true }
+            .map { array -> array.map { it.mapToItem() } }
             .onEach {
                 _trackData.value = it
+                _progress.value = false
             }
             .handleErrors { handleError(it) }
             .launchIn(this)

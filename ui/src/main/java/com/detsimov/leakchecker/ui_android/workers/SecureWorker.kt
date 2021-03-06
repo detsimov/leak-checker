@@ -7,6 +7,7 @@ import androidx.work.WorkerParameters
 import com.detsimov.leakchecker.domain.interactors.i.ISecureInteractor
 import com.detsimov.leakchecker.ui_android.R
 import com.detsimov.leakchecker.ui_android.common.inject
+import com.detsimov.leakchecker.ui_android.notifications.NotificationUtil
 import com.kirich1409.androidnotificationdsl.channels.createNotificationChannels
 import com.kirich1409.androidnotificationdsl.notify
 import java.net.UnknownHostException
@@ -29,15 +30,7 @@ class SecureWorker(context: Context, parameters: WorkerParameters) :
         } catch (any: Throwable) {
             return Result.failure()
         }
-        createNotificationChannels(applicationContext) {
-            channel("TEST", "TEST CHANNEL")
-        }
-
-        notify(applicationContext, Random.nextInt(10000), "TEST", R.drawable.ic_launcher_foreground) {
-            contentTitle("LeakChecker analyse result")
-            contentText("Founded ${result.leaksFound} leaks, see now!")
-            priority(NotificationCompat.PRIORITY_HIGH)
-        }
+        if (result.leaksFound > 0) NotificationUtil.showAnalyseScanNotification(result)
         return Result.success()
     }
 }

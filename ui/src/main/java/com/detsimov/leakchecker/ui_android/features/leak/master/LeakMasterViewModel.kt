@@ -1,13 +1,14 @@
 package com.detsimov.leakchecker.ui_android.features.leak.master
 
 import androidx.lifecycle.MutableLiveData
+import com.detsimov.core_domain.handleErrors
 import com.detsimov.core_ui.livedata.asLiveData
 import com.detsimov.core_ui.viewmodel.BaseViewModel
 import com.detsimov.leakchecker.domain.interactors.i.ILeakInteractor
 import com.detsimov.leakchecker.domain.models.*
 import com.detsimov.leakchecker.ui_android.features.leak.item.LeakItem
 import com.detsimov.leakchecker.ui_android.firebase.Analytics
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class LeakMasterViewModel(private val leakInteractor: ILeakInteractor) : BaseViewModel() {
@@ -16,7 +17,7 @@ class LeakMasterViewModel(private val leakInteractor: ILeakInteractor) : BaseVie
     val leaks = _leaks.asLiveData()
 
     init {
-       onGetLeaks()
+        onGetLeaks()
     }
 
     override fun handleError(throwable: Throwable) {
@@ -24,29 +25,18 @@ class LeakMasterViewModel(private val leakInteractor: ILeakInteractor) : BaseVie
         Analytics.recordException(throwable)
     }
 
-    private fun onGetLeaks(){
-        launch {
-            launch {
-                leakInteractor.ownDataFlow
-                    .collect { data ->
-                        data.loading { _progress.value = true }
-                            .successData { _progress.value = false
-                                _leaks.value = it.map { model -> model.mapToItem() }
-                            }
-                            .error { handleError(it) }
-                    }
+    private fun onGetLeaks() {
+        leakInteractor.ownDataFlow
+            .onStart { _progress.value = true }
+            .map { array -> array.map { it.mapToItem() } }
+            .onEach {
+                _leaks.value = it
+                _progress.value = false
             }
-            launch {
-                leakInteractor.refreshOwn()
-            }
-        }
+            .handleErrors { handleError(it) }
+            .launchIn(this)
     }
 
-    fun onRefreshLeaks() {
-        launch {
-            leakInteractor.refreshOwn()
-        }
-    }
 
     private fun LeakModel.mapToItem() =
         LeakItem(this@mapToItem)

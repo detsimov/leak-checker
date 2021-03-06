@@ -7,7 +7,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface ILeakInteractor : BaseInteractor {
 
-    val ownDataFlow: Flow<DataStatus<List<LeakModel>, Throwable>>
+    val ownDataFlow: Flow<List<LeakModel>>
 
-    suspend fun refreshOwn()
 }

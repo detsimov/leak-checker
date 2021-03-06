@@ -10,11 +10,7 @@ import kotlinx.coroutines.withContext
 
 internal class LeakInteractor(private val leakRepository: ILeakRepository) : ILeakInteractor {
 
-    override val ownDataFlow: Flow<DataStatus<List<LeakModel>, Throwable>> = leakRepository.ownDataFlow
-
-    override suspend fun refreshOwn() = withContext(Dispatchers.IO) {
-        leakRepository.refreshOwn()
-    }
+    override val ownDataFlow: Flow<List<LeakModel>> = leakRepository.ownDataFlow
 
 
 }

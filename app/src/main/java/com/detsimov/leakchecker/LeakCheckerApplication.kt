@@ -4,10 +4,12 @@ import android.app.Application
 import androidx.work.*
 import com.detsimov.leakchecker.data_local.di.dataModule
 import com.detsimov.leakchecker.domain.di.domainModule
+import com.detsimov.leakchecker.domain.models.ScanDataModel
 import com.detsimov.leakchecker.ui_android.AppProcess
 import com.detsimov.leakchecker.ui_android.Process
 import com.detsimov.leakchecker.ui_android.di.uiModule
 import com.detsimov.leakchecker.ui_android.firebase.Analytics
+import com.detsimov.leakchecker.ui_android.notifications.NotificationUtil
 import com.google.android.gms.ads.MobileAds
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -17,6 +19,8 @@ class LeakCheckerApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        NotificationUtil.init(this)
+        NotificationUtil.showAnalyseScanNotification(ScanDataModel(22))
         AppProcess.init(this)
         Analytics.init(this)
         if (AppProcess.isEqual(Process.MAIN)) {

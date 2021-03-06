@@ -6,9 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface ILeakRepository {
 
-    val ownDataFlow: Flow<DataStatus<List<LeakModel>, Throwable>>
-
-    suspend fun refreshOwn()
+    val ownDataFlow: Flow<List<LeakModel>>
 
     suspend fun add(scanned: LeakModel.Scanned)
 

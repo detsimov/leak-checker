@@ -14,8 +14,18 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <item name="android:textColor">@color/gray</item>
         <!-- Customize your theme here. -->
+        <item name="colorBottomNavigationBackground">@color/dark_super_light</item>
+        <item name="colorActivatedIconBottomNavigation">@color/gray</item>
+        <item name="colorDeactivatedIconBottomNavigation">@color/super_gray</item>
         <item name="colorGlobalBackground">@color/dark</item>
         <item name="colorBackgroundList">@color/dark_light</item>
         <item name="colorError">@color/red_200</item>
     </style>
+
+
+    <style name="TextAppearance.Error" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">?colorError</item>
+    </style>
+
+
 </resources>

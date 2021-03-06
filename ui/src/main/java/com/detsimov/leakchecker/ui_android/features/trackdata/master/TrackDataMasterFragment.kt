@@ -2,6 +2,7 @@ package com.detsimov.leakchecker.ui_android.features.trackdata.master
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.PopupMenu
@@ -82,6 +83,7 @@ class TrackDataMasterFragment :
     }
 
     override fun onShowError(error: Throwable) {
+        Log.i("123","error $error")
         when (error) {
             is TrackDataOverflowException -> {
                 Analytics.sendEvent(EVENT.USER_ADD_TRACK_DATA_CATCH_OVERFLOW)

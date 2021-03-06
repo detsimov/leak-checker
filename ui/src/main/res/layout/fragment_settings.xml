@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="?colorGlobalBackground"
     android:layout_height="match_parent">
 
     <com.google.android.material.appbar.MaterialToolbar
@@ -12,6 +13,7 @@
         android:layout_height="wrap_content"
         android:background="?colorPrimaryVariant"
         app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="?colorOnPrimary"
         app:title="@string/settings_master_title" />
 
     <LinearLayout
@@ -95,16 +97,5 @@
 
     </LinearLayout>
 
-
-    <TextView
-        android:id="@+id/tvAuthor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Application by @Detsimov"
-        android:elevation="10dp"
-        android:layout_margin="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

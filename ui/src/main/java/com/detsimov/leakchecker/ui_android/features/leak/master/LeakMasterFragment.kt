@@ -55,9 +55,7 @@ class LeakMasterFragment : BaseFragment<LeakMasterViewModel>(R.layout.fragment_m
 
     private fun setUpSwipeRefreshLayout() {
         viewBinding.swipeRefreshLayout.apply {
-            setOnRefreshListener {
-                viewModel.onRefreshLeaks()
-            }
+            isEnabled = false
         }
     }
 

@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:background="?colorPrimaryVariant"
         app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="?colorOnPrimary"
         app:title="@string/leak_master_title" />
 
 

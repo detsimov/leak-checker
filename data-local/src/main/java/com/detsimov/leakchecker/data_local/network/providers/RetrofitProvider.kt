@@ -18,7 +18,9 @@ internal class RetrofitProvider(private val okHttpClient: OkHttpClient) : Provid
         Retrofit.Builder()
             .client(okHttpClient)
             .baseUrl(SERVER_URL)
-            .addConverterFactory(Json.asConverterFactory(MediaType.get(contentType)))
+            .addConverterFactory(Json {
+                ignoreUnknownKeys = true
+            }.asConverterFactory(MediaType.get(contentType)))
             .build()
 
 }
