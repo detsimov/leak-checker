@@ -20,7 +20,6 @@ class LeakCheckerApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         NotificationUtil.init(this)
-        NotificationUtil.showAnalyseScanNotification(ScanDataModel(22))
         AppProcess.init(this)
         Analytics.init(this)
         if (AppProcess.isEqual(Process.MAIN)) {

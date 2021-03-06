@@ -40,7 +40,6 @@
 
 
     <!-- Строки Уведомлений -->
-    <string name="notification_channel_id_analyse_scan">LeakCheckerAnalyseScan</string>
     <string name="notification_channel_name_analyse_scan">Уведомления о результатах анализа</string>
     <string name="notification_title_analyse_scan">Результаты анализа</string>
     <string name="notification_content_analyse_scan">Найдено %1$s утечек, угроза безопасности!</string>

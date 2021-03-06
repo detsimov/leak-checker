@@ -83,7 +83,6 @@ class TrackDataMasterFragment :
     }
 
     override fun onShowError(error: Throwable) {
-        Log.i("123","error $error")
         when (error) {
             is TrackDataOverflowException -> {
                 Analytics.sendEvent(EVENT.USER_ADD_TRACK_DATA_CATCH_OVERFLOW)

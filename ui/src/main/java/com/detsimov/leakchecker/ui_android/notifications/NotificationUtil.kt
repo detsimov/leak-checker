@@ -1,9 +1,11 @@
 package com.detsimov.leakchecker.ui_android.notifications
 
+import android.app.PendingIntent
 import android.content.Context
 import androidx.core.app.NotificationCompat
 import com.detsimov.leakchecker.domain.models.ScanDataModel
 import com.detsimov.leakchecker.ui_android.R
+import com.detsimov.leakchecker.ui_android.features.main.view.MainActivity
 import com.kirich1409.androidnotificationdsl.channels.createNotificationChannels
 import com.kirich1409.androidnotificationdsl.notify
 import kotlin.random.Random
@@ -31,7 +33,7 @@ object NotificationUtil {
         }
 
 
-        notify(applicationContext, Random.nextInt(10000), "TEST", R.drawable.ic_launcher_foreground) {
+        notify(applicationContext, Random.nextInt(10000),  applicationContext.getString(CHANNEL_ID_ANALYSE_SCAN), R.drawable.ic_launcher_foreground) {
             contentTitle(applicationContext.getString(R.string.notification_title_analyse_scan))
             contentText(
                 applicationContext.getString(
@@ -39,6 +41,7 @@ object NotificationUtil {
                     scanDataModel.leaksFound.toString()
                 )
             )
+            contentIntent(PendingIntent.getActivity(applicationContext, Random.nextInt(10000), MainActivity.intent(applicationContext, true), PendingIntent.FLAG_UPDATE_CURRENT, null))
             priority(NotificationCompat.PRIORITY_HIGH)
         }
     }

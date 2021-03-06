@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import com.detsimov.leakchecker.ui_android.R
 import com.detsimov.leakchecker.ui_android.databinding.ActivityMainBinding
+import com.detsimov.leakchecker.ui_android.firebase.Analytics
+import com.detsimov.leakchecker.ui_android.firebase.EVENT
 import com.detsimov.leakchecker.ui_android.navigation.MainCicerone
 import com.detsimov.leakchecker.ui_android.navigation.Screens
 import com.detsimov.leakchecker.ui_android.navigation.cicerone
@@ -28,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(LayoutInflater.from(this))
         setContentView(binding.root)
         setUpCicerone()
+        setUpIsFromNotification()
     }
 
 
@@ -35,6 +38,11 @@ class MainActivity : AppCompatActivity() {
         cicerone.apply {
             router.replaceScreen(Screens.splash())
         }
+    }
+
+
+    private fun setUpIsFromNotification(){
+        if(intent.getBooleanExtra(EXTRA_IS_FROM_NOTIFICATION, false)) Analytics.sendEvent(EVENT.USER_CLICK_ON_ANALYSE_SCAN)
     }
 
     override fun onResume() {
@@ -51,7 +59,11 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
 
-        fun intent(context: Context) = Intent(context, MainActivity::class.java)
+        private const val EXTRA_IS_FROM_NOTIFICATION = "IS_FROM_NOTIFICATION"
+
+        fun intent(context: Context, isFromNotification: Boolean = false) = Intent(context, MainActivity::class.java).apply {
+            putExtra(EXTRA_IS_FROM_NOTIFICATION, isFromNotification)
+        }
     }
 
 

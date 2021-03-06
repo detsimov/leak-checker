@@ -101,11 +101,6 @@ class MainNavigationFragment : Fragment(R.layout.fragment_main_navigation),
             StackScreen.SETTINGS -> Screens.settingsMaster()
         }
 
-    override fun onDestroy() {
-        Log.i("123","wtf??")
-        super.onDestroy()
-    }
-
 
     companion object {
 

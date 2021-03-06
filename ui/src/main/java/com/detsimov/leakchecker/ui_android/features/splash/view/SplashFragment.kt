@@ -6,12 +6,14 @@ import android.view.View
 import android.widget.TextView
 import androidx.work.*
 import com.detsimov.core_ui.fragments.BaseFragment
+import com.detsimov.leakchecker.domain.models.ScanDataModel
 import com.detsimov.leakchecker.ui_android.BuildConfig
 import com.detsimov.leakchecker.ui_android.R
 import com.detsimov.leakchecker.ui_android.features.splash.vm.SplashViewModel
 import com.detsimov.leakchecker.ui_android.navigation.CiceroneQualifier
 import com.detsimov.leakchecker.ui_android.navigation.MainCicerone
 import com.detsimov.leakchecker.ui_android.navigation.router
+import com.detsimov.leakchecker.ui_android.notifications.NotificationUtil
 import com.detsimov.leakchecker.ui_android.workers.SecureWorker
 import com.github.terrakok.cicerone.BaseRouter
 import com.github.terrakok.cicerone.Router
