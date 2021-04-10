@@ -24,7 +24,6 @@ open class BaseViewModel : ViewModel(), CoroutineScope {
     protected val _progress = MutableLiveData<Boolean>()
     val progress = _progress.asLiveData()
 
-
     @CallSuper
     protected open fun handleError(throwable: Throwable) {
         _progress.value = false

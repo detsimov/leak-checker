@@ -2,6 +2,14 @@
 <resources>
     <string name="app_name">Leak checker</string>
 
+    <!-- Строки меню -->
+    <string name="menu_main_navigation_tracker_title">Трэкеры</string>
+    <string name="menu_main_navigation_leaks_title">Утечки</string>
+    <string name="menu_main_navigation_settings_title">Настройки</string>
+    <string name="menu_token_copy_title">Скопировать</string>
+    <string name="menu_track_data_delete">Удалить</string>
+    <string name="menu_home_delete_all">Удалить всё</string>
+
     <!-- Строки Leak Feature -->
     <string name="leak_master_title">Утечки</string>
     <string name="leak_item_title_without_data">Дополнительных данных нету</string>

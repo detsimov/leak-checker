@@ -2,17 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/btnTracker"
-        android:title="Трэкеры"
+        android:title="@string/menu_main_navigation_tracker_title"
         android:icon="@drawable/ic_baseline_track_changes_24"/>
 
     <item
         android:id="@+id/btnLeak"
-        android:title="Утечки"
+        android:title="@string/menu_main_navigation_leaks_title"
         android:icon="@drawable/ic_baseline_leak_24"/>
 
     <item
         android:id="@+id/btnSettings"
-        android:title="Настройки"
+        android:title="@string/menu_main_navigation_settings_title"
         android:icon="@drawable/ic_baseline_settings_24"/>
 
 </menu>

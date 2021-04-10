@@ -5,7 +5,7 @@
     <item
         android:id="@+id/btnCopy"
         android:icon="@drawable/ic_baseline_delete_24"
-        android:title="Скопировать"
+        android:title="@string/menu_token_copy_title"
         app:showAsAction="ifRoom"/>
 
 </menu>

@@ -20,10 +20,10 @@ android {
             isMinifyEnabled = true
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
         }
-//        getByName("debug") {
-//            isMinifyEnabled = true
-//            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
-//        }
+        getByName("debug") {
+            isMinifyEnabled = true
+            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
+        }
     }
 
     applicationVariants.all {
