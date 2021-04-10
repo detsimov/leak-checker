@@ -33,7 +33,7 @@ subprojects {
                 jvmTarget = JavaVersion.VERSION_1_8.toString()
             }
         }
-    plugins.withType<com.android.build.gradle.internal.plugins.BasePlugin<*, *, *>> {
+    plugins.withType<com.android.build.gradle.internal.plugins.BasePlugin<*,*>> {
         configure<com.android.build.gradle.BaseExtension> {
             compileSdkVersion(AndroidSdk.compile)
             defaultConfig {

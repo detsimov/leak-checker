@@ -16,7 +16,7 @@ object AndroidSdk {
 object Plugin {
 
     object Versions {
-        const val buildGradle = "7.0.0-alpha08"
+        const val buildGradle = "4.1.3"
         const val sqlDelightGradle = "1.4.4"
         const val firebaseCrashlyticsGradle = "2.5.0"
         const val gmsPlayServicesAdsGradle = "19.7.0"

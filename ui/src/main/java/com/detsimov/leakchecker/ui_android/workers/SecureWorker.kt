@@ -1,23 +1,45 @@
 package com.detsimov.leakchecker.ui_android.workers
 
 import android.content.Context
-import androidx.core.app.NotificationCompat
-import androidx.work.CoroutineWorker
-import androidx.work.WorkerParameters
+import androidx.work.*
 import com.detsimov.leakchecker.domain.interactors.i.ISecureInteractor
-import com.detsimov.leakchecker.ui_android.R
 import com.detsimov.leakchecker.ui_android.common.inject
 import com.detsimov.leakchecker.ui_android.notifications.NotificationUtil
-import com.kirich1409.androidnotificationdsl.channels.createNotificationChannels
-import com.kirich1409.androidnotificationdsl.notify
 import java.net.UnknownHostException
-import kotlin.random.Random
+import java.util.concurrent.TimeUnit
 
 class SecureWorker(context: Context, parameters: WorkerParameters) :
     CoroutineWorker(context, parameters) {
 
-    companion object {
-        const val TAG = "SecureWorker"
+    companion object Manager {
+
+        private const val TAG = "SecureWorker"
+        private const val REPEAT_INTERVAL_HOURS = 4L
+        private const val FLEX_INTERVAL_HOURS = 2L
+
+        fun start(applicationContext: Context) {
+            WorkManager.getInstance(applicationContext).enqueueUniquePeriodicWork(
+                TAG,
+                ExistingPeriodicWorkPolicy.KEEP,
+                PeriodicWorkRequestBuilder<SecureWorker>(
+                    REPEAT_INTERVAL_HOURS,
+                    TimeUnit.HOURS,
+                    FLEX_INTERVAL_HOURS,
+                    TimeUnit.HOURS
+                ).apply {
+                    setBackoffCriteria(
+                        BackoffPolicy.LINEAR,
+                        OneTimeWorkRequest.MIN_BACKOFF_MILLIS,
+                        TimeUnit.MILLISECONDS
+                    )
+                    setConstraints(
+                        Constraints.Builder()
+                            .setRequiredNetworkType(NetworkType.CONNECTED)
+                            .build()
+                    )
+                }.build()
+            )
+        }
     }
 
     private val secureInteractor by inject<ISecureInteractor>()

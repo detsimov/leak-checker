@@ -31,28 +31,7 @@ class SplashFragment : BaseFragment<SplashViewModel>(R.layout.fragment_splash) {
     }
 
     private fun setUpWorker() {
-        WorkManager.getInstance(requireContext().applicationContext)
-            .enqueueUniquePeriodicWork(
-                SecureWorker.TAG,
-                ExistingPeriodicWorkPolicy.KEEP,
-                PeriodicWorkRequestBuilder<SecureWorker>(
-                    26,
-                    TimeUnit.HOURS,
-                    2,
-                    TimeUnit.HOURS
-                ).apply {
-                    setBackoffCriteria(
-                        BackoffPolicy.LINEAR,
-                        OneTimeWorkRequest.MIN_BACKOFF_MILLIS,
-                        TimeUnit.MILLISECONDS
-                    )
-                    setConstraints(
-                        Constraints.Builder()
-                            .setRequiredNetworkType(NetworkType.CONNECTED)
-                            .build()
-                    )
-                }.build()
-            )
+        SecureWorker.start(requireContext().applicationContext)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

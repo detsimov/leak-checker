@@ -1,12 +1,11 @@
 package com.detsimov.leakchecker.ui_android.features.main_navigation.view
 
-import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.detsimov.leakchecker.ui_android.BuildConfig
 import com.detsimov.leakchecker.ui_android.R
 import com.detsimov.leakchecker.ui_android.databinding.FragmentMainNavigationBinding
 import com.detsimov.leakchecker.ui_android.features.main_navigation.adapter.ViewPagerAdapter
@@ -36,9 +35,9 @@ class MainNavigationFragment : Fragment(R.layout.fragment_main_navigation),
         setUpBanner()
     }
 
-    @SuppressLint("MissingPermission")
+
     private fun setUpBanner() {
-        viewBinding.adView.apply {
+        if (BuildConfig.DEBUG.not()) viewBinding.adView.apply {
             loadAd(AdRequest.Builder().build())
             adListener = object : AdListener() {
                 override fun onAdLoaded() {
@@ -47,7 +46,7 @@ class MainNavigationFragment : Fragment(R.layout.fragment_main_navigation),
                 }
 
                 override fun onAdClicked() {
-                   Analytics.sendEvent(EVENT.AD_CLICK_BANNER)
+                    Analytics.sendEvent(EVENT.AD_CLICK_BANNER)
                 }
 
                 override fun onAdClosed() {
@@ -59,6 +58,7 @@ class MainNavigationFragment : Fragment(R.layout.fragment_main_navigation),
                 }
             }
         }
+
     }
 
 

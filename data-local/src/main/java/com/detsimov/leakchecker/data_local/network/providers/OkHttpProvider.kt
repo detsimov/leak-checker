@@ -45,7 +45,7 @@ internal class TokenInterceptor(private val tokenDataSource: TokenDataSource) : 
 
 internal class VersionInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response =
-        chain.proceed(chain.request().resumeRequestWithVersion(BuildConfig.VERSION_CODE))
+            chain.proceed(chain.request().resumeRequestWithVersion(BuildConfig.VERSION_CODE))
 
     private fun Request.resumeRequestWithVersion(version: Int) =
         newBuilder()
