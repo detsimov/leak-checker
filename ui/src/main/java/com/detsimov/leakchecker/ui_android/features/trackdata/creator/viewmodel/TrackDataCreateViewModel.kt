@@ -26,6 +26,5 @@ class TrackDataCreateViewModel(private val trackDataInteractor: ITrackDataIntera
             _closePressed.call()
         }
     }
-
 }
 

@@ -1,6 +1,5 @@
 package com.detsimov.leakchecker.domain.repositories
 
-import com.detsimov.core_domain.models.DataStatus
 import com.detsimov.leakchecker.domain.models.LeakModel
 import kotlinx.coroutines.flow.Flow
 
@@ -14,13 +13,10 @@ interface ILeakRepository {
 
     suspend fun clear()
 
-    suspend fun fetch(fetchParams: FetchParams = FetchParams.All) : List<LeakModel>
-
+    suspend fun fetch(fetchParams: FetchParams = FetchParams.All): List<LeakModel>
 }
-
 
 sealed class FetchParams {
 
     object All : FetchParams()
-
 }

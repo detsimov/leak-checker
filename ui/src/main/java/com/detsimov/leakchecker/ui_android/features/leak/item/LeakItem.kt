@@ -3,6 +3,7 @@ package com.detsimov.leakchecker.ui_android.features.leak.item
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import com.detsimov.leakchecker.domain.models.LeakModel
 import com.detsimov.leakchecker.ui_android.R
 import com.detsimov.leakchecker.ui_android.databinding.ItemLeakBinding
@@ -18,50 +19,45 @@ class LeakItem(model: LeakModel) : ModelAbstractBindingItem<LeakModel, ItemLeakB
     override fun createBinding(inflater: LayoutInflater, parent: ViewGroup?): ItemLeakBinding =
         ItemLeakBinding.inflate(inflater, parent, false)
 
-
     override fun bindView(binding: ItemLeakBinding, payloads: List<Any>) {
         binding.apply {
             bindData()
-            bindEmpty(bindDateOfLeak().not() and bindSource().not())
+            bindDateOfLeak()
+            bindSource()
+            bindEmpty()
         }
     }
-
 
     private fun ItemLeakBinding.bindData() {
         tvData.text = model.data
     }
 
-    private fun ItemLeakBinding.bindDateOfLeak(): Boolean =
-        tvDate.run {
+    private fun ItemLeakBinding.bindDateOfLeak() {
+        tvDate.apply {
             if (model.lastBreach.isNullOrBlank().not()) {
                 text = context.getString(R.string.leak_item_breach, model.lastBreach)
-                visibility = View.VISIBLE
-                true
+                isVisible = true
             } else {
-                visibility = View.GONE
-                false
+                isVisible = false
             }
         }
+    }
 
-
-    private fun ItemLeakBinding.bindSource(): Boolean =
-        tvSource.run {
-            if (model.source.isNullOrBlank().not()) {
+    private fun ItemLeakBinding.bindSource() {
+        tvSource.apply {
+            if(model.source.isNullOrBlank().not()) {
                 text = context.getString(R.string.leak_item_source, model.source)
-                visibility = View.VISIBLE
-                true
+                isVisible = true
             } else {
-                visibility = View.GONE
-                false
+                isVisible = false
             }
         }
+    }
 
-
-    private fun ItemLeakBinding.bindEmpty(isEmpty: Boolean) {
+    private fun ItemLeakBinding.bindEmpty() {
+        val isEmpty = model.run { source.isNullOrBlank() && lastBreach.isNullOrBlank() }
         tvEmpty.apply {
             visibility = if (isEmpty) View.VISIBLE else View.GONE
         }
     }
-
-
 }

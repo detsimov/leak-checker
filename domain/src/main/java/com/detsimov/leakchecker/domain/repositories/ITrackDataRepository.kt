@@ -21,8 +21,6 @@ interface ITrackDataRepository {
     suspend fun delete(trackDataModel: TrackDataModel)
 
     suspend fun clear()
-
-
 }
 
 sealed class UpdateParams(open val id: Long) {

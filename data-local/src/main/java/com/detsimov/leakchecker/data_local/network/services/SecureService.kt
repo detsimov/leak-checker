@@ -15,5 +15,4 @@ internal interface SecureService {
 
     @POST("secure")
     suspend fun scan(@Body request: SecureDTO.Request.Scan): SecureDTO.Response.Scan
-
 }

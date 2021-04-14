@@ -11,7 +11,6 @@ internal class SecureDTO {
     class Request {
         @Serializable
         data class Scan(val trackData: List<TrackData>, val ignore: List<Leak>?) {
-
             companion object : RequestFactory<Pair<List<TrackDataModel>, List<LeakModel>?>, Scan> {
                 override fun from(model: Pair<List<TrackDataModel>, List<LeakModel>?>): Scan = model.run {
                     Scan(first.map {
@@ -20,7 +19,6 @@ internal class SecureDTO {
                         Leak(it.data, it.source, it.lastBreach)
                     })
                 }
-
 
                 @Serializable
                 data class TrackData constructor(
@@ -35,21 +33,14 @@ internal class SecureDTO {
                     val source: String?,
                     val dateFoundedMillis: String?
                 )
-
-
             }
         }
-
     }
 
-
     class Response {
-
         @Serializable
         data class Scan(val leaks: List<Leak>) {
-
             companion object : ResponseMapper<Scan, List<LeakModel.Scanned>> {
-
                 override fun Scan.transform(): List<LeakModel.Scanned> = leaks.map {
                     LeakModel.Scanned(
                         it.line,
@@ -59,7 +50,6 @@ internal class SecureDTO {
                         it.fromLineType
                     )
                 }
-
             }
 
             @Serializable

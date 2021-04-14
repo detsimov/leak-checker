@@ -10,15 +10,12 @@ import android.widget.Spinner
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-
 fun Spinner.setItemSelectedCallback(callback: (position: Int) -> Unit) {
     onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
         override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
             callback.invoke(position)
         }
-
         override fun onNothingSelected(parent: AdapterView<*>?) {}
-
     }
 }
 

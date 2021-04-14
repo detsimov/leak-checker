@@ -13,7 +13,6 @@ inline fun <reified T : Any> ListenableWorker.inject(
     noinline parameters: ParametersDefinition? = null
 ) = lazy(mode) { get<T>(qualifier, parameters) }
 
-
 inline fun <reified T : Any> ListenableWorker.get(
     qualifier: Qualifier? = null,
     noinline parameters: ParametersDefinition? = null

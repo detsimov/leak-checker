@@ -10,12 +10,11 @@ import androidx.fragment.app.DialogFragment
 import com.detsimov.core_ui.viewmodel.BaseViewModel
 
 /**
- * @author Artyom Gaydin
- * Базовый класс для работы с фрагментом
+ * @author Artyom Detsimov
+ * Базовый класс для работы с диалог фрагментом
  */
 abstract class BaseDialogFragment<VM : BaseViewModel>(private val layoutId: Int) :
     DialogFragment() {
-
 
     abstract val viewModel: VM
 
@@ -36,24 +35,42 @@ abstract class BaseDialogFragment<VM : BaseViewModel>(private val layoutId: Int)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         log("onViewCreated")
         setUpDialog()
-        viewModel.progress.observe(viewLifecycleOwner, {
+        viewModel.progress.observe(viewLifecycleOwner) {
             if (it) onShowProgress()
             else onHideProgress()
-        })
-        viewModel.error.observe(viewLifecycleOwner, {
+        }
+        viewModel.error.observe(viewLifecycleOwner) {
             onShowError(it)
-        })
+        }
     }
 
     private fun setUpDialog(){
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
     }
 
-
     protected open fun onShowError(error: Throwable) {}
     protected open fun onShowProgress() {}
     protected open fun onHideProgress() {}
 
+    override fun onResume() {
+        log("onResume")
+        super.onResume()
+    }
+
+    override fun onStart() {
+        log("onStart")
+        super.onStart()
+    }
+
+    override fun onPause() {
+        log("onPause")
+        super.onPause()
+    }
+
+    override fun onStop() {
+        log("onStop")
+        super.onStop()
+    }
 
     override fun onDestroyView() {
         log("onDestroyView")
@@ -64,7 +81,6 @@ abstract class BaseDialogFragment<VM : BaseViewModel>(private val layoutId: Int)
         log("onDestroy")
         super.onDestroy()
     }
-
 }
 
 

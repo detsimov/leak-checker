@@ -11,15 +11,15 @@ internal class RuleRepository : IRuleRepository {
     private val mask = MaskImpl(PredefinedSlots.RUS_PHONE_NUMBER, true)
 
     override fun checkRuPhoneNumber(number: String) {
-        if (mask.run {
-                clear()
-                insertFront(number)
-                filled().not()
-            }) throw PhoneRuleException(number)
+        val isPhoneValid = mask.run {
+            clear()
+            insertFront(number)
+            filled()
+        }
+        if (isPhoneValid.not()) throw PhoneRuleException(number)
     }
 
     override fun checkEmail(email: String) {
         if (email.isEmpty()) throw EmailRuleException(email)
-
     }
 }

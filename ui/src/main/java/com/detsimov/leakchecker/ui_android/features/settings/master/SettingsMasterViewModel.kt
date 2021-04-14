@@ -11,7 +11,6 @@ import kotlinx.coroutines.launch
 
 class SettingsMasterViewModel(private val tokenRepository: ITokenRepository) : BaseViewModel() {
 
-
     private val _token = MutableLiveData<String?>()
     val token = _token.asLiveData()
 
@@ -32,5 +31,4 @@ class SettingsMasterViewModel(private val tokenRepository: ITokenRepository) : B
     fun onCopyText(clipData: ClipData){
         _copyClipData.value = clipData
     }
-
 }

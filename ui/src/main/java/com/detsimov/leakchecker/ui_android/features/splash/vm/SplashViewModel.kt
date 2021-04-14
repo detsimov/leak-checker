@@ -20,8 +20,7 @@ class SplashViewModel(
     init {
         launch {
             authInteractor.authenticate()
-            mainRouter.replaceScreen(Screens.mainNavigation())
+            mainRouter.replaceScreen(Screens.MainNavigation())
         }
     }
-
 }

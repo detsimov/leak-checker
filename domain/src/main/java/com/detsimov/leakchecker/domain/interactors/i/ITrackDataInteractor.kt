@@ -23,7 +23,6 @@ interface ITrackDataInteractor : BaseInteractor {
     suspend fun clear()
 
     suspend fun check(trackData: String, trackType: TrackDataModel.TypeValue)
-
 }
 
 class TrackDataOwnListIsNotInitializedException : TrackDataException()

@@ -15,34 +15,34 @@ import com.detsimov.leakchecker.ui_android.navigation.cicerone
 import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.androidx.AppNavigator
 
-
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
     private val cicerone = cicerone<Router>(MainCicerone)
+
     private val appNavigator =  AppNavigator(
         this@MainActivity,
         R.id.fragmentContainerView
     )
 
+    private val binding: ActivityMainBinding by lazy {
+        ActivityMainBinding.inflate(LayoutInflater.from(this))
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(LayoutInflater.from(this))
         setContentView(binding.root)
         setUpCicerone()
         setUpIsFromNotification()
     }
 
-
     private fun setUpCicerone() {
         cicerone.apply {
-            router.replaceScreen(Screens.splash())
+            router.replaceScreen(Screens.Splash())
         }
     }
 
-
     private fun setUpIsFromNotification(){
-        if(intent.getBooleanExtra(EXTRA_IS_FROM_NOTIFICATION, false)) Analytics.sendEvent(EVENT.USER_CLICK_ON_ANALYSE_SCAN)
+        if(intent.getBooleanExtra(ARG_IS_FROM_NOTIFICATION, false)) Analytics.sendEvent(EVENT.USER_CLICK_ON_ANALYSE_SCAN)
     }
 
     override fun onResume() {
@@ -56,17 +56,14 @@ class MainActivity : AppCompatActivity() {
         cicerone.getNavigatorHolder().removeNavigator()
     }
 
-
     companion object {
 
-        private const val EXTRA_IS_FROM_NOTIFICATION = "IS_FROM_NOTIFICATION"
+        private const val ARG_IS_FROM_NOTIFICATION = "IS_FROM_NOTIFICATION"
 
         fun intent(context: Context, isFromNotification: Boolean = false) = Intent(context, MainActivity::class.java).apply {
-            putExtra(EXTRA_IS_FROM_NOTIFICATION, isFromNotification)
+            putExtra(ARG_IS_FROM_NOTIFICATION, isFromNotification)
         }
     }
-
-
 }
 
 

@@ -18,14 +18,13 @@ internal class TrackDataInteractor(
 
     override val ownDataFlow: Flow<List<TrackDataModel>> = trackDataRepository.ownDataFlow
 
-
     override suspend fun isOwnDataInitialized(): Boolean = trackDataRepository.ownDataFlow.firstOrNull() != null
 
-    override suspend fun isCanAdd(): Boolean =
-        trackDataRepository.ownDataFlow.firstOrNull()?.let { ownDataList ->
-            ownDataList.count() < 3
+    override suspend fun isCanAdd(): Boolean {
+        return trackDataRepository.ownDataFlow.firstOrNull()?.let { ownDataList ->
+            ownDataList.count() < TrackDataModel.MAX_COUNT
         } ?: throw TrackDataOwnListIsNotInitializedException()
-
+    }
 
     override suspend fun add(trackData: String, trackType: TrackDataModel.TypeValue) {
         withContext(Dispatchers.IO) {
@@ -39,12 +38,11 @@ internal class TrackDataInteractor(
         trackDataRepository.delete(trackDataModel)
     }
 
-    override suspend fun clear() {
+    override suspend fun clear() = withContext(Dispatchers.IO) {
         trackDataRepository.clear()
     }
 
     override suspend fun check(trackData: String, trackType: TrackDataModel.TypeValue) =
         if (trackType == TrackDataModel.TypeValue.PHONE) ruleRepository.checkRuPhoneNumber(trackData)
         else ruleRepository.checkEmail(trackData)
-
 }

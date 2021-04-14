@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import com.detsimov.core_ui.livedata.asLiveData
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
-import kotlin.coroutines.EmptyCoroutineContext
 
 open class BaseViewModel : ViewModel(), CoroutineScope {
 

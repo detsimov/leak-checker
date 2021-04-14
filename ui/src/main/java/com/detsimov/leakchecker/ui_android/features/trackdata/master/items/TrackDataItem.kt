@@ -15,6 +15,10 @@ class TrackDataItem(private val trackData: TrackDataModel) :
     override val type: Int
         get() = R.id.item_track_data
 
+    override fun createBinding(inflater: LayoutInflater, parent: ViewGroup?): ItemTrackDataBinding {
+        return ItemTrackDataBinding.inflate(inflater, parent, false)
+    }
+
     override fun bindView(binding: ItemTrackDataBinding, payloads: List<Any>) {
         binding.apply {
             bindData()
@@ -40,17 +44,9 @@ class TrackDataItem(private val trackData: TrackDataModel) :
     }
 
     private fun ItemTrackDataBinding.bindImageOfType() {
-        imgType.apply {
-            setImageResource(
-                if (trackData.type == TrackDataModel.TypeValue.PHONE)
-                    R.drawable.ic_baseline_local_phone_24
-                else
-                    R.drawable.ic_baseline_email_24
-            )
-        }
+        imgType.setImageResource(
+            if (trackData.type == TrackDataModel.TypeValue.PHONE) R.drawable.ic_baseline_local_phone_24
+            else R.drawable.ic_baseline_email_24
+        )
     }
-
-    override fun createBinding(inflater: LayoutInflater, parent: ViewGroup?): ItemTrackDataBinding =
-        ItemTrackDataBinding.inflate(inflater, parent, false)
-
 }

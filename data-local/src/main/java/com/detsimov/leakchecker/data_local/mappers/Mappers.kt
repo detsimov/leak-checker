@@ -15,7 +15,6 @@ val trackDataMapper: (
     TrackDataModel(id, value, type, period, last_check?.let { SimpleDateFormatFactory.fromMillis(it) })
 }
 
-
 val leaksMapper: (
     id: Long,
     data: String,

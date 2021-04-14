@@ -23,9 +23,9 @@ fun Fragment.snack(view: View, message: String, length: Int = Snackbar.LENGTH_SH
 
 
 fun DialogFragment.showOptimize(fragmentManager: FragmentManager, tag: String?) {
-    if (fragmentManager.findFragmentByTag(tag) == null)
+    if (fragmentManager.findFragmentByTag(tag) == null) {
         show(fragmentManager, tag)
-
+    }
 }
 
 fun Fragment.log(text: String) {
@@ -55,7 +55,6 @@ inline fun <reified T> Fragment.findListenerByParent(): T? {
     }
     return if (T::class.java.isInstance(activity)) activity as T? else null
 }
-
 
 /**
  * @param T Листенер

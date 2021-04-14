@@ -5,7 +5,7 @@ import android.view.View
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.detsimov.core_ui.fragments.BaseFragment
 import com.detsimov.leakchecker.ui_android.R
-import com.detsimov.leakchecker.ui_android.common.BaseDiffCallbackModelImpl
+import com.detsimov.leakchecker.ui_android.common.DiffCallbackModelImpl
 import com.detsimov.leakchecker.ui_android.databinding.FragmentMasterLeakBinding
 import com.detsimov.leakchecker.ui_android.features.leak.item.LeakItem
 import com.mikepenz.fastadapter.FastAdapter
@@ -25,11 +25,10 @@ class LeakMasterFragment : BaseFragment<LeakMasterViewModel>(R.layout.fragment_m
         super.onViewCreated(view, savedInstanceState)
         setUpRecyclerView()
         setUpSwipeRefreshLayout()
-
         with(viewModel){
-            leaks.observe(viewLifecycleOwner, {
-                FastAdapterDiffUtil.set(leakItemAdapter, it, BaseDiffCallbackModelImpl())
-            })
+            leaks.observe(viewLifecycleOwner) {
+                FastAdapterDiffUtil.set(leakItemAdapter, it, DiffCallbackModelImpl())
+            }
         }
     }
 
@@ -43,9 +42,7 @@ class LeakMasterFragment : BaseFragment<LeakMasterViewModel>(R.layout.fragment_m
         viewBinding.swipeRefreshLayout.apply {
             isRefreshing = false
         }
-
     }
-
 
     private fun setUpRecyclerView(){
         viewBinding.listLeaks.apply {
@@ -59,12 +56,8 @@ class LeakMasterFragment : BaseFragment<LeakMasterViewModel>(R.layout.fragment_m
         }
     }
 
-
     companion object {
-
-        const val TAG = "LeakMasterFragment"
 
         fun create() = LeakMasterFragment()
     }
-
 }

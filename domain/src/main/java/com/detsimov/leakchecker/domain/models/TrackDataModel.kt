@@ -11,7 +11,8 @@ data class TrackDataModel(
     val lastCheck: String?
 ) {
 
-    fun isCanScan() = SimpleDateFormatFactory.toMillis(lastCheck) + TimeUnit.DAYS.toMillis(period.days.toLong()) < System.currentTimeMillis()
+    fun isCanScan() = SimpleDateFormatFactory.toMillis(lastCheck) +
+            TimeUnit.DAYS.toMillis(period.days.toLong()) < System.currentTimeMillis()
 
     enum class TypeValue {
         EMAIL,
@@ -20,5 +21,10 @@ data class TrackDataModel(
 
     enum class Period(val days: Int) {
         DEFAULT(1)
+    }
+
+    companion object {
+
+        const val MAX_COUNT = 3
     }
 }

@@ -8,10 +8,9 @@ import com.detsimov.leakchecker.domain.repositories.ITokenRepository
 import com.detsimov.leakchecker.domain.repositories.TokenIsEmptyException
 
 internal class TokenRepository(
-    val tokenService: TokenService,
-    val tokenDataSource: TokenDataSource
-) :
-    ITokenRepository {
+    private val tokenService: TokenService,
+    private val tokenDataSource: TokenDataSource
+) : ITokenRepository {
 
     override suspend fun createAndSave(accountModel: AccountModel) {
         tokenDataSource.token =

@@ -32,15 +32,14 @@ abstract class BaseFragment<VM : BaseViewModel>(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         log("onViewCreated")
-        viewModel.progress.observe(viewLifecycleOwner, {
+        viewModel.progress.observe(viewLifecycleOwner) {
             if (it) onShowProgress()
             else onHideProgress()
-        })
-        viewModel.error.observe(viewLifecycleOwner, {
+        }
+        viewModel.error.observe(viewLifecycleOwner) {
             onShowError(it)
-        })
+        }
     }
-
 
     /**
      * Отображение сообщения или еще чего либо при ошибке
@@ -50,12 +49,31 @@ abstract class BaseFragment<VM : BaseViewModel>(
         toast("Handle unknown error $error")
     }
 
-
     /**
      * Показать/Спрятать прогресс из [viewModel]
      */
     protected open fun onShowProgress() {}
     protected open fun onHideProgress() {}
+
+    override fun onResume() {
+        log("onResume")
+        super.onResume()
+    }
+
+    override fun onStart() {
+        log("onStart")
+        super.onStart()
+    }
+
+    override fun onPause() {
+        log("onPause")
+        super.onPause()
+    }
+
+    override fun onStop() {
+        log("onStop")
+        super.onStop()
+    }
 
 
     override fun onDestroyView() {

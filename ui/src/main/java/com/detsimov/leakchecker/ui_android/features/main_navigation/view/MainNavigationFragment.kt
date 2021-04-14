@@ -24,7 +24,6 @@ class MainNavigationFragment : Fragment(R.layout.fragment_main_navigation),
 
     private val viewBinding by viewBinding(FragmentMainNavigationBinding::bind)
 
-
     private val viewPagerAdapter by lazy {
         ViewPagerAdapter(this)
     }
@@ -34,7 +33,6 @@ class MainNavigationFragment : Fragment(R.layout.fragment_main_navigation),
         setUpBottomNavigation()
         setUpBanner()
     }
-
 
     private fun setUpBanner() {
         if (BuildConfig.DEBUG.not()) viewBinding.adView.apply {
@@ -58,9 +56,7 @@ class MainNavigationFragment : Fragment(R.layout.fragment_main_navigation),
                 }
             }
         }
-
     }
-
 
     private fun setUpViewPager() {
         viewBinding.viewPager.apply {
@@ -73,34 +69,24 @@ class MainNavigationFragment : Fragment(R.layout.fragment_main_navigation),
     private fun setUpBottomNavigation() {
         viewBinding.apply {
             bottomNavigationView.setOnNavigationItemSelectedListener {
-                when (it.itemId) {
-                    R.id.btnTracker -> {
-                        viewPager.setStackItem(StackScreen.TRACK)
-                        true
-                    }
-                    R.id.btnLeak -> {
-                        viewPager.setStackItem(StackScreen.LEAK)
-                        true
-                    }
-                    R.id.btnSettings -> {
-                        viewPager.setStackItem(StackScreen.SETTINGS)
-                        true
-                    }
-                    else -> false
+                val screen = when (it.itemId) {
+                    R.id.btnTracker -> StackScreen.TRACK
+                    R.id.btnLeak -> StackScreen.LEAK
+                    R.id.btnSettings -> StackScreen.SETTINGS
+                    else -> error("Unknown item id")
                 }
+                viewPager.setStackItem(screen)
+                true
             }
             bottomNavigationView.selectedItemId = R.id.btnTracker
         }
     }
 
-
-    override fun onInitFragment(stackScreen: StackScreen): FragmentScreen =
-        when (stackScreen) {
-            StackScreen.LEAK -> Screens.leakMaster()
-            StackScreen.TRACK -> Screens.trackDataMaster()
-            StackScreen.SETTINGS -> Screens.settingsMaster()
-        }
-
+    override fun onInitFragment(stackScreen: StackScreen): FragmentScreen = when (stackScreen) {
+        StackScreen.LEAK -> Screens.LeakMaster()
+        StackScreen.TRACK -> Screens.TrackDataMaster()
+        StackScreen.SETTINGS -> Screens.SettingsMaster()
+    }
 
     companion object {
 

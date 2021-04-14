@@ -6,6 +6,7 @@ import android.app.Application
 import android.content.Context
 
 object AppProcess {
+
     private lateinit var applicationContext: Context
 
     lateinit var value: String
@@ -21,11 +22,10 @@ object AppProcess {
         Process.MAIN -> applicationContext.packageName == value
     }
 
-
     @SuppressLint("DefaultLocale")
-    fun resolveWorkManagerProcess(process: Process) =
-        applicationContext.packageName.plus(":${process.name.toLowerCase()}")
-
+    fun resolveWorkManagerProcess(process: Process) : String {
+       return applicationContext.packageName.plus(":${process.name.toLowerCase()}")
+    }
 }
 
 val Application.processName: String?

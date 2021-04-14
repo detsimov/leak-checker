@@ -37,7 +37,6 @@ class StackFragment : Fragment(R.layout.fragment_stack), FragmentScreenContainer
         router.navigateTo(stackInitFragmentFactory.onInitFragment(getStackFromArgument()))
     }
 
-
     override fun onResume() {
         cicerone.getNavigatorHolder().setNavigator(appNavigator)
         super.onResume()
@@ -48,9 +47,7 @@ class StackFragment : Fragment(R.layout.fragment_stack), FragmentScreenContainer
         super.onPause()
     }
 
-
     private fun getStackFromArgument() = requireArguments()[ARG_STACK] as StackScreen
-
 
     companion object {
 

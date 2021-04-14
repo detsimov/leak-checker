@@ -9,19 +9,23 @@ import com.github.terrakok.cicerone.androidx.FragmentScreen
 
 object Screens {
 
-    fun mainNavigation() =
-        FragmentScreen { MainNavigationFragment.create() }
+    fun MainNavigation() = FragmentScreen {
+        MainNavigationFragment.create()
+    }
 
-    fun splash() =
-        FragmentScreen { SplashFragment.create() }
+    fun Splash() = FragmentScreen {
+        SplashFragment.create()
+    }
 
-    fun trackDataMaster(tag: String = TrackDataMasterFragment.TAG) =
-        FragmentScreen(tag) { TrackDataMasterFragment.create() }
+    fun TrackDataMaster() = FragmentScreen {
+        TrackDataMasterFragment.create()
+    }
 
-    fun leakMaster(tag: String = LeakMasterFragment.TAG) =
-        FragmentScreen(tag) { LeakMasterFragment.create() }
+    fun LeakMaster() = FragmentScreen {
+        LeakMasterFragment.create()
+    }
 
-    fun settingsMaster(tag: String = SettingsMasterFragment.TAG) =
-        FragmentScreen(tag) { SettingsMasterFragment.create() }
-
+    fun SettingsMaster() = FragmentScreen {
+        SettingsMasterFragment.create()
+    }
 }

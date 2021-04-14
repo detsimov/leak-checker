@@ -9,7 +9,6 @@ import org.koin.core.module.Module
 import org.koin.core.qualifier.qualifier
 import org.koin.core.scope.Scope
 
-
 inline fun <reified T : BaseRouter> ComponentCallbacks.cicerone(ciceroneQualifier: CiceroneQualifier) =
     get<Cicerone<T>>(qualifier(ciceroneQualifier.tag))
 
@@ -28,7 +27,6 @@ inline fun <reified T : BaseRouter> Scope.router(ciceroneQualifier: CiceroneQual
 
 inline fun <reified T : BaseRouter> Scope.cicerone(ciceroneQualifier: CiceroneQualifier) =
     get<Cicerone<T>>(qualifier(ciceroneQualifier.tag))
-
 
 open class CiceroneQualifier {
     open val tag = this::class.java.name

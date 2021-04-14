@@ -17,8 +17,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SettingsMasterFragment : BaseFragment<SettingsMasterViewModel>(R.layout.fragment_settings) {
 
-
     override val viewModel: SettingsMasterViewModel by viewModel()
+
     private val viewBinding by viewBinding(FragmentSettingsBinding::bind)
 
     private val clipBoardManager by lazy {
@@ -27,28 +27,28 @@ class SettingsMasterFragment : BaseFragment<SettingsMasterViewModel>(R.layout.fr
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setUpVersion()
-
         with(viewModel) {
-            token.observe(viewLifecycleOwner, {
-                setUpToken(it)
-            })
-            copyClipData.observe(viewLifecycleOwner, {
+            token.observe(viewLifecycleOwner) {
+                handleToken(it)
+            }
+            copyClipData.observe(viewLifecycleOwner) {
                 copyClipData(it)
-            })
+            }
         }
     }
 
     private fun copyClipData(clipData: ClipData) {
         clipBoardManager.setPrimaryClip(clipData)
-        for (item in 0 until clipData.itemCount)
+        for (item in 0 until clipData.itemCount) {
             toast("Скопировано: ${clipData.getItemAt(item).text}")
+        }
     }
 
-    private fun setUpToken(token: String? = null) {
+    private fun handleToken(token: String? = null) {
         viewBinding.apply {
-            if(token != null) tvDataToken.text = token
+            if (token != null) tvDataToken.text = token
             else tvDataToken.setText(R.string.settings_master_error_token)
-            viewBinding.containerToken.apply {
+            containerToken.apply {
                 if (token == null) setOnLongClickListener(null)
                 else setOnLongClickListener {
                     showTokenPopupMenu(it)
@@ -70,12 +70,11 @@ class SettingsMasterFragment : BaseFragment<SettingsMasterViewModel>(R.layout.fr
             setOnMenuItemClickListener { menuItem ->
                 when (menuItem.itemId) {
                     R.id.btnCopy -> {
-                        viewModel.onCopyText(
-                            ClipData.newPlainText(
-                                "LeakChecker token",
-                                viewBinding.tvDataToken.text.toString()
-                            )
+                        val clipData = ClipData.newPlainText(
+                            "LeakChecker token",
+                            viewBinding.tvDataToken.text.toString()
                         )
+                        viewModel.onCopyText(clipData)
                         true
                     }
                     else -> false
@@ -86,9 +85,6 @@ class SettingsMasterFragment : BaseFragment<SettingsMasterViewModel>(R.layout.fr
 
     companion object {
 
-        const val TAG = "SettingsMasterFragment"
-
         fun create() = SettingsMasterFragment()
     }
-
 }

@@ -4,7 +4,6 @@ import kotlinx.serialization.Serializable
 
 internal class TokenDTO {
 
-
     class Response {
         @Serializable
         data class Create(val token: String)

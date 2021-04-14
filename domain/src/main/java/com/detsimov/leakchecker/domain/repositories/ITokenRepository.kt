@@ -10,7 +10,6 @@ interface ITokenRepository {
     suspend fun get() : String?
 
     suspend fun require() : String
-
 }
 
 class TokenIsEmptyException : TokenException("Token is not in the cache")

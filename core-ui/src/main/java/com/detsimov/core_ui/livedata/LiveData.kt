@@ -35,9 +35,7 @@ fun <T> MutableLiveData<T>.asLiveData() = this as LiveData<T>
 fun <T> LiveData<T>.requireValue(defaultValue: T? = null): T =
     value ?: defaultValue ?: error("require value error")
 
-
 class NonNullMediatorLiveData<T> : MediatorLiveData<T>()
-
 
 fun <T> LiveData<T>.nonNull(): NonNullMediatorLiveData<T> {
     val mediator: NonNullMediatorLiveData<T> = NonNullMediatorLiveData()

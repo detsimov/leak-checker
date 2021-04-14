@@ -9,13 +9,17 @@ import com.squareup.sqldelight.EnumColumnAdapter
 import com.squareup.sqldelight.android.AndroidSqliteDriver
 
 class DatabaseProvider(private val context: Context) : Provider<Database> {
-    override fun get(): Database =
-        Database(
-            AndroidSqliteDriver(Database.Schema, context, "application.db"),
-            Leak.Adapter(from_line_typeAdapter = EnumColumnAdapter()),
-            TrackData.Adapter(
-                periodAdapter = EnumColumnAdapter(),
-                typeAdapter = EnumColumnAdapter(),
-            )
-        )
+
+    private fun createDriver() = AndroidSqliteDriver(Database.Schema, context, "application.db")
+
+    private fun createLeakAdapter() = Leak.Adapter(from_line_typeAdapter = EnumColumnAdapter())
+
+    private fun createTrackDataAdapter() = TrackData.Adapter(
+        periodAdapter = EnumColumnAdapter(),
+        typeAdapter = EnumColumnAdapter(),
+    )
+
+    override fun get(): Database {
+        return Database(createDriver(), createLeakAdapter(), createTrackDataAdapter())
+    }
 }

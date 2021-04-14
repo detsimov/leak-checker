@@ -12,6 +12,4 @@ object SimpleDateFormatFactory {
     fun fromMillis(millis: Long): String = formatter.format(Date(millis))
 
     fun toMillis(string: String?) : Long = if (string != null) formatter.parse(string)?.time ?: 0 else 0
-
-
 }

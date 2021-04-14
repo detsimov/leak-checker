@@ -2,7 +2,6 @@ package com.detsimov.leakchecker.ui_android.features.trackdata.master
 
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.PopupMenu
@@ -17,7 +16,7 @@ import com.detsimov.core_ui.view.stopProgress
 import com.detsimov.leakchecker.domain.interactors.i.TrackDataOverflowException
 import com.detsimov.leakchecker.domain.models.TrackDataModel
 import com.detsimov.leakchecker.ui_android.R
-import com.detsimov.leakchecker.ui_android.common.BaseDiffCallbackModelImpl
+import com.detsimov.leakchecker.ui_android.common.DiffCallbackModelImpl
 import com.detsimov.leakchecker.ui_android.databinding.FragmentMasterTrackdataBinding
 import com.detsimov.leakchecker.ui_android.features.trackdata.creator.models.TrackDataCreateUi
 import com.detsimov.leakchecker.ui_android.features.trackdata.creator.view.TrackDataCreateDialog
@@ -45,11 +44,10 @@ class TrackDataMasterFragment :
         setUpRecyclerView()
         setUpToolbar()
         setUpSwipeRefreshLayout()
-
-        viewModel.apply {
-            progressSaveTrackData.observe(viewLifecycleOwner, {
+        with(viewModel) {
+            progressSaveTrackData.observe(viewLifecycleOwner) {
                 setProgressSaveTrackData(it)
-            })
+            }
             showTrackDataCreateDialog.observe(viewLifecycleOwner) {
                 showTrackDataCreateDialog()
             }
@@ -60,14 +58,13 @@ class TrackDataMasterFragment :
                 showTrackDataDeleteDialog(it)
             }
             trackData.observe(viewLifecycleOwner) {
-                FastAdapterDiffUtil.set(trackDataItemAdapter, it, BaseDiffCallbackModelImpl())
+                FastAdapterDiffUtil.set(trackDataItemAdapter, it, DiffCallbackModelImpl())
             }
-            clearTrackData.observe(viewLifecycleOwner, {
+            clearTrackData.observe(viewLifecycleOwner) {
                 trackDataItemAdapter.clear()
-            })
+            }
         }
     }
-
 
     private fun setProgressSaveTrackData(isProgress: Boolean) {
         viewBinding.btnAddTrack.apply {
@@ -149,18 +146,18 @@ class TrackDataMasterFragment :
     }
 
     private fun setUpRecyclerView() {
-        viewBinding.listTrackData.apply {
-            adapter = FastAdapter.with(trackDataItemAdapter).apply {
-                onLongClickListener = { view, _, item, _ ->
-                    showTrackDataPopupMenu(view, item)
-                    true
-                }
+        viewBinding.listTrackData.adapter = FastAdapter.with(trackDataItemAdapter).apply {
+            onLongClickListener = { view, _, item, _ ->
+                showTrackDataPopupMenu(view, item)
+                true
             }
         }
     }
 
     private fun showTrackDataClearAllDialog() {
-        showTrackDataRationaleDialog(getString(R.string.track_data_master_message_dialog_clear_all)) {
+        showTrackDataRationaleDialog(
+            getString(R.string.track_data_master_message_dialog_clear_all)
+        ) {
             viewModel.onDeleteAllTrackData()
         }
     }
@@ -172,38 +169,34 @@ class TrackDataMasterFragment :
                 trackData.value,
                 trackData.type
             )
-        ) { viewModel.onDeleteTrackData(trackData) }
+        ) {
+            viewModel.onDeleteTrackData(trackData)
+        }
     }
 
-
-    private inline fun showTrackDataRationaleDialog(
+    private fun showTrackDataRationaleDialog(
         message: String,
-        crossinline actionOk: () -> Unit
-    ) =
-        AlertDialog.Builder(requireContext())
-            .setTitle(getString(R.string.track_data_master_title_dialog_delete))
-            .setMessage(message)
-            .setPositiveButton(getString(R.string.track_data_master_btn_ok_dialog_delete)) { _, _ ->
-                actionOk()
-            }
-            .setNegativeButton(getString(R.string.track_data_master_btn_cancel_dialog_delete), null)
-            .show()
+        actionOk: () -> Unit
+    ) = AlertDialog.Builder(requireContext())
+        .setTitle(getString(R.string.track_data_master_title_dialog_delete))
+        .setMessage(message)
+        .setPositiveButton(getString(R.string.track_data_master_btn_ok_dialog_delete)) { _, _ ->
+            actionOk()
+        }
+        .setNegativeButton(getString(R.string.track_data_master_btn_cancel_dialog_delete), null)
+        .show()
 
-
-
-    private fun showTrackDataCreateDialog() =
+    private fun showTrackDataCreateDialog() {
         TrackDataCreateDialog.create()
             .showOptimize(childFragmentManager, TrackDataCreateDialog.TAG)
+    }
 
-
-    override fun onTrackDataCreated(trackDataCreateUi: TrackDataCreateUi) =
+    override fun onTrackDataCreated(trackDataCreateUi: TrackDataCreateUi) {
         viewModel.onSaveTrackData(trackDataCreateUi.value, trackDataCreateUi.type)
-
+    }
 
     companion object {
-        const val TAG = "HOME_FRAGMENT"
 
         fun create() = TrackDataMasterFragment()
     }
-
 }

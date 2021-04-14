@@ -1,6 +1,5 @@
 package com.detsimov.leakchecker.domain.di
 
-
 import com.detsimov.leakchecker.domain.interactors.AuthInteractor
 import com.detsimov.leakchecker.domain.interactors.LeakInteractor
 import com.detsimov.leakchecker.domain.interactors.SecureInteractor
@@ -18,5 +17,4 @@ val domainModule = module {
     single<IAuthInteractor> { AuthInteractor(get(),get()) }
     single<ILeakInteractor> { LeakInteractor(get()) }
     single<ISecureInteractor> { SecureInteractor(get(),get(),get()) }
-
 }

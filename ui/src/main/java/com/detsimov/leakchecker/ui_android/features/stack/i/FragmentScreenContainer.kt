@@ -9,5 +9,4 @@ interface FragmentScreenContainer {
     val router: Router
 }
 
-
 fun Fragment.getSelfRouter() = requireListener<FragmentScreenContainer>().router

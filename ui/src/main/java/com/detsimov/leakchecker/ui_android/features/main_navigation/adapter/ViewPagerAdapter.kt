@@ -9,10 +9,8 @@ class ViewPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
     val items = StackScreen.values().map { StackFragment.create(it) }
 
-
     override fun getItemCount(): Int = items.size
 
     override fun createFragment(position: Int): Fragment = items[position]
-
 }
 

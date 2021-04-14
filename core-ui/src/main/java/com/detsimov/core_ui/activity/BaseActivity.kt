@@ -10,13 +10,13 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.progress.observe(this, {
+        viewModel.progress.observe(this) {
             if (it) onShowProgress()
             else onHideProgress()
-        })
-        viewModel.error.observe(this, {
+        }
+        viewModel.error.observe(this) {
             onShowError(it)
-        })
+        }
     }
 
     /**

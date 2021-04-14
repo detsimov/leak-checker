@@ -2,7 +2,6 @@ package com.detsimov.leakchecker.domain.repositories
 
 import com.detsimov.leakchecker.domain.exceptions.RuleException
 
-
 interface IRuleRepository {
 
     @Throws(PhoneRuleException::class)
@@ -10,7 +9,6 @@ interface IRuleRepository {
 
     @Throws(EmailRuleException::class)
     fun checkEmail(email: String)
-
 }
 
 class PhoneRuleException(value: String) : RuleException(value, "Phone")

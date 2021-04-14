@@ -121,14 +121,11 @@ class TrackDataCreateDialog :
             )
         }
 
-
     companion object {
 
         val TAG = "TrackDataCreateDialog"
 
         fun create() = TrackDataCreateDialog()
     }
-
-
 }
 

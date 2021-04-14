@@ -35,10 +35,8 @@ class TrackDataMasterViewModel(private val trackDataInteractor: ITrackDataIntera
     private val _clearTrackData = SingleLiveData<Unit>()
     val clearTrackData = _clearTrackData.asLiveData()
 
-
-
     init {
-        onGetTrackData()
+        subscribeToTrackData()
     }
 
     override fun handleError(throwable: Throwable) {
@@ -60,10 +58,10 @@ class TrackDataMasterViewModel(private val trackDataInteractor: ITrackDataIntera
         }
     }
 
-    private fun onGetTrackData() {
+    private fun subscribeToTrackData() {
         trackDataInteractor.ownDataFlow
             .onStart { _progress.value = true }
-            .map { array -> array.map { it.mapToItem() } }
+            .map { array -> array.map { TrackDataItem(it) } }
             .onEach {
                 _trackData.value = it
                 _progress.value = false
@@ -100,9 +98,4 @@ class TrackDataMasterViewModel(private val trackDataInteractor: ITrackDataIntera
                 _showTrackDataCreateDialog.call()
         }
     }
-
-    private fun TrackDataModel.mapToItem() =
-        TrackDataItem(this@mapToItem)
-
-
 }

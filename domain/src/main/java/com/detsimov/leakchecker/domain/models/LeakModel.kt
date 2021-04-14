@@ -16,5 +16,4 @@ data class LeakModel(
         val fromLine: String,
         val fromLineType: TrackDataModel.TypeValue
     )
-
 }

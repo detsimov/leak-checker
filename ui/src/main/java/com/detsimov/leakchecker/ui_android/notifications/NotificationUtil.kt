@@ -18,11 +18,9 @@ object NotificationUtil {
     private val CHANNEL_ID_ANALYSE_SCAN = R.string.notification_channel_id_analyse_scan
     private val CHANNEL_NAME_ANALYSE_SCAN = R.string.notification_channel_name_analyse_scan
 
-
     fun init(context: Context) {
         this.applicationContext = context
     }
-
 
     fun showAnalyseScanNotification(scanDataModel: ScanDataModel) {
         createNotificationChannels(applicationContext) {
@@ -32,8 +30,12 @@ object NotificationUtil {
             )
         }
 
-
-        notify(applicationContext, Random.nextInt(10000),  applicationContext.getString(CHANNEL_ID_ANALYSE_SCAN), R.drawable.ic_launcher_foreground) {
+        notify(
+            applicationContext,
+            Random.nextInt(10000),
+            applicationContext.getString(CHANNEL_ID_ANALYSE_SCAN),
+            R.drawable.ic_launcher_foreground
+        ) {
             contentTitle(applicationContext.getString(R.string.notification_title_analyse_scan))
             contentText(
                 applicationContext.getString(
@@ -41,7 +43,15 @@ object NotificationUtil {
                     scanDataModel.leaksFound.toString()
                 )
             )
-            contentIntent(PendingIntent.getActivity(applicationContext, Random.nextInt(10000), MainActivity.intent(applicationContext, true), PendingIntent.FLAG_UPDATE_CURRENT, null))
+            contentIntent(
+                PendingIntent.getActivity(
+                    applicationContext,
+                    Random.nextInt(10000),
+                    MainActivity.intent(applicationContext, true),
+                    PendingIntent.FLAG_UPDATE_CURRENT,
+                    null
+                )
+            )
             priority(NotificationCompat.PRIORITY_HIGH)
         }
     }

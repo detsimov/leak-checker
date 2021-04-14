@@ -10,7 +10,8 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
 
-internal class OkHttpProvider(private val context: Context,tokenDataSource: TokenDataSource) : Provider<OkHttpClient> {
+internal class OkHttpProvider(private val context: Context, tokenDataSource: TokenDataSource) :
+    Provider<OkHttpClient> {
 
     private val tokenInterceptor = TokenInterceptor(tokenDataSource)
 
@@ -22,33 +23,30 @@ internal class OkHttpProvider(private val context: Context,tokenDataSource: Toke
             .addInterceptor(tokenInterceptor)
             .addInterceptor(versionInterceptor)
             .build()
-
 }
 
-
 internal class TokenInterceptor(private val tokenDataSource: TokenDataSource) : Interceptor {
+
     override fun intercept(chain: Interceptor.Chain): Response {
-        tokenDataSource.token?.let {
-            return chain.proceed(
+        return tokenDataSource.token?.let {
+            chain.proceed(
                 chain.request().resumeRequestWithAccessToken(it)
             )
-        }
-        return chain.proceed(chain.request())
+        } ?: chain.proceed(chain.request())
     }
 
-    private fun Request.resumeRequestWithAccessToken(accessToken: String) =
-        newBuilder()
-            .header("Access-Id", accessToken)
-            .build()
-
+    private fun Request.resumeRequestWithAccessToken(accessToken: String) = newBuilder()
+        .header("Access-Id", accessToken)
+        .build()
 }
 
 internal class VersionInterceptor : Interceptor {
-    override fun intercept(chain: Interceptor.Chain): Response =
-            chain.proceed(chain.request().resumeRequestWithVersion(BuildConfig.VERSION_CODE))
 
-    private fun Request.resumeRequestWithVersion(version: Int) =
-        newBuilder()
-            .header("Version-Code", version.toString())
-            .build()
+    override fun intercept(chain: Interceptor.Chain): Response = chain.proceed(
+        chain.request().resumeRequestWithVersion(BuildConfig.VERSION_CODE)
+    )
+
+    private fun Request.resumeRequestWithVersion(version: Int) = newBuilder()
+        .header("Version-Code", version.toString())
+        .build()
 }

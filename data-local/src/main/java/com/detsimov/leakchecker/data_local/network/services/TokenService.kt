@@ -15,5 +15,4 @@ internal interface TokenService {
 
     @POST("user")
     suspend fun create(@Body request: TokenDTO.Request.Create): TokenDTO.Response.Create
-
 }

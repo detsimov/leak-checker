@@ -17,7 +17,6 @@ val uiModule = module {
     /** Cicerone */
     cicerone(Router(), MainCicerone)
 
-
     /** ViewModel's */
     viewModel { SplashViewModel(get(), router(MainCicerone)) }
 
@@ -27,5 +26,4 @@ val uiModule = module {
     viewModel { LeakMasterViewModel(get()) }
 
     viewModel { SettingsMasterViewModel(get()) }
-
 }

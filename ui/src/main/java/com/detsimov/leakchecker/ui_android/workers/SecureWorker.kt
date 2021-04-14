@@ -14,7 +14,7 @@ class SecureWorker(context: Context, parameters: WorkerParameters) :
     companion object Manager {
 
         private const val TAG = "SecureWorker"
-        private const val REPEAT_INTERVAL_HOURS = 12L
+        private const val REPEAT_INTERVAL_HOURS = 24L
         private const val FLEX_INTERVAL_HOURS = 2L
 
         fun start(applicationContext: Context) {
