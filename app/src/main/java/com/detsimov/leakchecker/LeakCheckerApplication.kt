@@ -16,7 +16,6 @@ import org.koin.core.context.startKoin
 
 class LeakCheckerApplication : Application() {
 
-
     override fun onCreate() {
         super.onCreate()
         NotificationUtil.init(this)
