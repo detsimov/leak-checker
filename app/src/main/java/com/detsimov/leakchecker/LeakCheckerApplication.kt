@@ -4,7 +4,6 @@ import android.app.Application
 import androidx.work.*
 import com.detsimov.leakchecker.data_local.di.dataModule
 import com.detsimov.leakchecker.domain.di.domainModule
-import com.detsimov.leakchecker.domain.models.ScanDataModel
 import com.detsimov.leakchecker.ui_android.AppProcess
 import com.detsimov.leakchecker.ui_android.Process
 import com.detsimov.leakchecker.ui_android.di.uiModule
@@ -22,7 +21,6 @@ class LeakCheckerApplication : Application() {
         AppProcess.init(this)
         Analytics.init(this)
         if (AppProcess.isEqual(Process.MAIN)) {
-            MobileAds.initialize(this)
             startKoin {
                 androidContext(this@LeakCheckerApplication)
                 modules(domainModule, dataModule, uiModule)

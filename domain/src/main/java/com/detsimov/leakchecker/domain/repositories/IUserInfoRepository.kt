@@ -1,6 +1,8 @@
 package com.detsimov.leakchecker.domain.repositories
 
-interface IAppInfoRepository{
+interface IUserInfoRepository{
+
+    var isAcceptedConsent: Boolean
 
     suspend fun id() : String
 }

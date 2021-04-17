@@ -2,13 +2,13 @@ package com.detsimov.leakchecker.data_local.datasources
 
 import android.content.Context
 import com.detsimov.core_data.DataSource
-import com.detsimov.core_data.prefStringNullable
+import com.detsimov.core_data.string
 
 internal class TokenDataSource(context: Context) : DataSource {
 
     private val sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
 
-    var token by sharedPreferences.prefStringNullable(PREF_KEY_TOKEN)
+    var token by sharedPreferences.string(PREF_KEY_TOKEN)
 
     companion object {
         private const val PREF_NAME = "TokenDataSource"
