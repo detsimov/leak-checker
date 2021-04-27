@@ -10,7 +10,7 @@ import retrofit2.Retrofit
 internal class RetrofitProvider(private val okHttpClient: OkHttpClient) : Provider<Retrofit> {
 
     companion object {
-        private const val SERVER_URL = "http://etaapatia.ru/v1/leakchecker/"
+        private const val SERVER_URL = "https://etaapatia.ru/v1/leakchecker/"
         private const val contentType = "application/json"
     }
 

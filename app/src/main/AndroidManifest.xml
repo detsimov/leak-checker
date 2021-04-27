@@ -14,9 +14,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.LeakChecker"
-        android:usesCleartextTraffic="true">
-
+        android:theme="@style/Theme.LeakChecker">
 
         <activity
             android:name="com.detsimov.leakchecker.ui_android.features.main.view.MainActivity"
@@ -33,7 +31,4 @@
             android:value="ca-app-pub-8156484988433534~8424245696"/>
 
     </application>
-
-
-
 </manifest>
