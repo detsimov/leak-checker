@@ -9,7 +9,7 @@ CREATE TABLE Leak (
 		from_line_type TEXT AS TrackDataModel.TypeValue NOT NULL
 );
 
-all: SELECT * FROM Leak;
+all: SELECT * FROM Leak ORDER BY id DESC;
 
 add: INSERT INTO Leak(data, last_breach, source, from_line, from_line_type) VALUES(?,?,?,?,?);
 

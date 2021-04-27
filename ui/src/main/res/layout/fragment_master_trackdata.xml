@@ -17,7 +17,6 @@
         app:titleTextColor="?colorOnPrimary"
         app:title="@string/track_data_master_title" />
 
-
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
@@ -44,7 +43,6 @@
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnAddTrack"
         android:layout_width="wrap_content"
@@ -54,7 +52,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:contentDescription="@null" />
-
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnScan"
@@ -67,6 +64,5 @@
         app:layout_constraintEnd_toStartOf="@id/btnAddTrack"
         app:layout_constraintStart_toStartOf="parent"
         tools:visibility="visible" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

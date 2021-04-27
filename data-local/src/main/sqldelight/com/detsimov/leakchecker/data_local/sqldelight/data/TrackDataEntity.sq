@@ -13,7 +13,7 @@ CREATE TABLE TrackData (
 
 updateLastCheck: UPDATE TrackData SET last_check = ? WHERE id = ?;
 
-all: SELECT * FROM TrackData;
+all: SELECT * FROM TrackData ORDER BY id DESC;
 
 add: INSERT OR REPLACE INTO TrackData(value, type, period) VALUES(?,?,?);
 
