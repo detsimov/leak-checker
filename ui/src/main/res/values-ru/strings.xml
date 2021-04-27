@@ -30,6 +30,7 @@
     <string name="track_data_create_title_data">Данные</string>
     <string name="track_data_master_title_dialog_clear_all">Трэкеры</string>
     <string name="track_data_create_btn_add">Добавить</string>
+    <string name="track_data_master_message_greeting_dialog">Вы добавили первую TrackData, каждые 24ч она будет проверяться нашим сервисом! Сейчас вы можете произвести ручное сканирование для ознакомления.</string>
     <string name="track_data_master_message_dialog_clear_all">Вы действительно хотите удалить все данные?</string>
     <string name="track_data_master_btn_ok_dialog_clear_all">Ок</string>
     <string name="track_data_master_btn_cancel_dialog_clear_all">Отмена</string>
@@ -59,5 +60,6 @@
         <item>Item1</item>
     </array>
     <string name="track_data_create_warning_phone">Поддерживаются только Российские номера</string>
+    <string name="track_data_master_btn_scan">Сканировать</string>
 
 </resources>

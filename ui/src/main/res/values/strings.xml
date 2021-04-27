@@ -21,7 +21,7 @@
     <string name="settings_master_title_app_info">About application</string>
     <string name="settings_master_app_info">Version %1$s, build %2$d</string>
     <string name="settings_master_error_token">An error occurred while withdrawing the token</string>
-    <string name="settings_master_consent"> <![CDATA[<a href="https://leakchecker.ru/privacy.html">Privacy policy</a>]]> and
+    <string name="settings_master_consent" translatable="false"> <![CDATA[<a href="https://leakchecker.ru/privacy.html">Privacy policy</a>]]> and
         <![CDATA[<a href="https://leakchecker.ru/terms.html">terms of use</a>]]></string>
 
     <!-- Строки TrackData Feature -->
@@ -31,6 +31,8 @@
     <string name="track_data_create_title_data">Data</string>
     <string name="track_data_master_title_dialog_clear_all">Trackers</string>
     <string name="track_data_create_btn_add">Confirm</string>
+    <string name="track_data_master_btn_scan">Scan</string>
+    <string name="track_data_master_message_greeting_dialog">You have added the first TrackData, every 24 hours it will be checked by our service! You can now do a manual scan for your reference.</string>
     <string name="track_data_master_message_dialog_clear_all">Are you sure you want to delete all data?</string>
     <string name="track_data_master_btn_ok_dialog_clear_all">OK</string>
     <string name="track_data_master_btn_cancel_dialog_clear_all">Cancel</string>

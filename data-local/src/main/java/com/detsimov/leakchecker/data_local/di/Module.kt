@@ -1,6 +1,7 @@
 package com.detsimov.leakchecker.data_local.di
 
 import com.detsimov.leakchecker.data_local.database.DatabaseProvider
+import com.detsimov.leakchecker.data_local.datasources.SecureDataSource
 import com.detsimov.leakchecker.data_local.datasources.TokenDataSource
 import com.detsimov.leakchecker.data_local.datasources.UserInfoDataSource
 import com.detsimov.leakchecker.data_local.network.providers.OkHttpProvider
@@ -30,11 +31,12 @@ val dataModule = module {
     single<ILeakRepository> { LeakRepository(get()) }
 
     /** Security */
-    single<ISecure> { Secure(get()) }
+    single<ISecure> { Secure(get(), get()) }
 
     /** DataSources */
     single { TokenDataSource(get()) }
     single { UserInfoDataSource(get()) }
+    single { SecureDataSource(get()) }
 
     /** Providers */
     single { DatabaseProvider(get()).get() }

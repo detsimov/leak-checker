@@ -1,5 +1,6 @@
 package com.detsimov.leakchecker.data_local.security
 
+import com.detsimov.leakchecker.data_local.datasources.SecureDataSource
 import com.detsimov.leakchecker.data_local.network.dto.SecureDTO
 import com.detsimov.leakchecker.data_local.network.dto.SecureDTO.Response.Scan.Companion.transform
 import com.detsimov.leakchecker.data_local.network.services.SecureService
@@ -7,7 +8,12 @@ import com.detsimov.leakchecker.domain.models.LeakModel
 import com.detsimov.leakchecker.domain.models.TrackDataModel
 import com.detsimov.leakchecker.domain.service.ISecure
 
-internal class Secure(private val secureService: SecureService) : ISecure {
+internal class Secure(
+    private val secureService: SecureService,
+    secureDataSource: SecureDataSource
+) : ISecure {
+
+    override var scanCount: Int by secureDataSource.scanCount
 
     override suspend fun scanLeaks(
         trackDataWithLeaks: Pair<List<TrackDataModel>, List<LeakModel>>

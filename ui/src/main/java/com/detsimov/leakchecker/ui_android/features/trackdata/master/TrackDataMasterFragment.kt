@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.PopupMenu
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.isVisible
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.detsimov.core_ui.fragments.BaseFragment
 import com.detsimov.core_ui.fragments.showOptimize
@@ -38,6 +39,18 @@ class TrackDataMasterFragment :
 
     private val trackDataItemAdapter = ItemAdapter<TrackDataItem>()
 
+    private val greetingDialog by lazy {
+        AlertDialog.Builder(requireContext())
+            .setMessage(getString(R.string.track_data_master_message_greeting_dialog))
+            .setPositiveButton("OK", null)
+            .create()
+            .apply {
+                setOnShowListener {
+                    Analytics.sendEvent(EVENT.GREETING_DIALOG_SHOWED)
+                }
+            }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpButtons()
@@ -62,6 +75,10 @@ class TrackDataMasterFragment :
             }
             clearTrackData.observe(viewLifecycleOwner) {
                 trackDataItemAdapter.clear()
+            }
+            isCanScan.observe(viewLifecycleOwner) { isCanScan ->
+                viewBinding.btnScan.isVisible = isCanScan
+                if (isCanScan) greetingDialog.show()
             }
         }
     }
@@ -105,6 +122,9 @@ class TrackDataMasterFragment :
         viewBinding.apply {
             btnAddTrack.setOnClickListener {
                 viewModel.onShowTrackDataCreateDialog()
+            }
+            btnScan.setOnClickListener {
+                viewModel.onScanTrackData()
             }
         }
     }

@@ -1,6 +1,7 @@
 package com.detsimov.leakchecker.ui_android.features.trackdata.master
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.distinctUntilChanged
 import com.detsimov.core_domain.handleErrors
 import com.detsimov.core_ui.livedata.SingleLiveData
 import com.detsimov.core_ui.livedata.asLiveData
@@ -11,7 +12,11 @@ import com.detsimov.leakchecker.domain.models.TrackDataModel
 import com.detsimov.leakchecker.ui_android.features.trackdata.master.items.TrackDataItem
 import com.detsimov.leakchecker.ui_android.firebase.Analytics
 import com.detsimov.leakchecker.ui_android.firebase.EVENT
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
 class TrackDataMasterViewModel(private val trackDataInteractor: ITrackDataInteractor, private val secureInteractor: ISecureInteractor) :
@@ -34,6 +39,11 @@ class TrackDataMasterViewModel(private val trackDataInteractor: ITrackDataIntera
 
     private val _clearTrackData = SingleLiveData<Unit>()
     val clearTrackData = _clearTrackData.asLiveData()
+
+    private val _isCanScan = MutableLiveData(false)
+    val isCanScan = _isCanScan.asLiveData().distinctUntilChanged()
+
+    private var scanJob: Job? = null
 
     init {
         subscribeToTrackData()
@@ -63,6 +73,9 @@ class TrackDataMasterViewModel(private val trackDataInteractor: ITrackDataIntera
             .onStart { _progress.value = true }
             .map { array -> array.map { TrackDataItem(it) } }
             .onEach {
+                if (it.isNotEmpty()) {
+                    _isCanScan.value = secureInteractor.scanCount == 0 && it.first().model.id == 1L
+                }
                 _trackData.value = it
                 _progress.value = false
             }
@@ -76,6 +89,13 @@ class TrackDataMasterViewModel(private val trackDataInteractor: ITrackDataIntera
 
     fun onShowTrackDataDeleteDialog(trackData: TrackDataModel) {
         _showTrackDataDeleteDialog.value = trackData
+    }
+
+    fun onScanTrackData() {
+        scanJob?.cancel()
+        scanJob = launch {
+            secureInteractor.fullScan(true)
+        }
     }
 
     fun onDeleteAllTrackData() {
@@ -94,8 +114,9 @@ class TrackDataMasterViewModel(private val trackDataInteractor: ITrackDataIntera
     fun onShowTrackDataCreateDialog() {
         Analytics.sendEvent(EVENT.USER_ADD_TRACK_DATA_CLICK)
         launch {
-            if (trackDataInteractor.isOwnDataInitialized())
+            if (trackDataInteractor.isOwnDataInitialized()) {
                 _showTrackDataCreateDialog.call()
+            }
         }
     }
 }
