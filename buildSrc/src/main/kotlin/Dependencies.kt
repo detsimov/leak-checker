@@ -3,8 +3,8 @@ import org.gradle.api.artifacts.dsl.DependencyHandler
 const val kotlinVersion = "1.4.20"
 
 object App {
-    const val versionName = "0.5"
-    const val versionCode = 1
+    const val versionName = "0.5.5"
+    const val versionCode = 2
 }
 
 object AndroidSdk {
