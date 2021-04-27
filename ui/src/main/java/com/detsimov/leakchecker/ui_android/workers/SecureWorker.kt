@@ -2,6 +2,7 @@ package com.detsimov.leakchecker.ui_android.workers
 
 import android.content.Context
 import androidx.work.*
+import com.detsimov.leakchecker.domain.interactors.i.IAuthInteractor
 import com.detsimov.leakchecker.domain.interactors.i.ISecureInteractor
 import com.detsimov.leakchecker.ui_android.common.inject
 import com.detsimov.leakchecker.ui_android.notifications.NotificationUtil
@@ -43,9 +44,11 @@ class SecureWorker(context: Context, parameters: WorkerParameters) :
     }
 
     private val secureInteractor by inject<ISecureInteractor>()
+    private val authInteractor by inject<IAuthInteractor>()
 
     override suspend fun doWork(): Result {
         val result = try {
+            authInteractor.authenticate()
             secureInteractor.fullScan()
         } catch (ignore: UnknownHostException) {
             return Result.retry()

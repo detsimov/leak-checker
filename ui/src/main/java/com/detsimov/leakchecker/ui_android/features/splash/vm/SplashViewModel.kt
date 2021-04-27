@@ -8,6 +8,7 @@ import com.detsimov.leakchecker.ui_android.firebase.Analytics
 import com.detsimov.leakchecker.ui_android.firebase.EVENT
 import com.detsimov.leakchecker.ui_android.navigation.Screens
 import com.github.terrakok.cicerone.Router
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class SplashViewModel(
@@ -50,9 +51,19 @@ class SplashViewModel(
 
     private fun startAuthenticate() {
         launch {
-            authInteractor.authenticate()
+            try {
+                delay(AUTH_DELAY)
+                authInteractor.authenticate()
+            } catch (any: Throwable) {
+                Analytics.recordException(any)
+            }
             mainRouter.replaceScreen(Screens.MainNavigation())
         }
+    }
+
+    companion object {
+
+        private const val AUTH_DELAY = 1200L
     }
 
     override fun handleError(throwable: Throwable) {

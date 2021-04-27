@@ -13,8 +13,7 @@ internal class AuthInteractor(
     private val appInfoRepository: IUserInfoRepository
 ) : IAuthInteractor {
 
-    override suspend fun authenticate(): Unit = withContext(Dispatchers.IO) {
-        delay(1500)
+    override suspend fun authenticate() = withContext(Dispatchers.IO) {
         if (isAuthorized().not()) {
             tokenRepository.createAndSave(AccountModel(appInfoRepository.id(), false))
         }

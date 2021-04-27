@@ -78,7 +78,9 @@ class TrackDataMasterFragment :
             }
             isCanScan.observe(viewLifecycleOwner) { isCanScan ->
                 viewBinding.btnScan.isVisible = isCanScan
-                if (isCanScan) greetingDialog.show()
+            }
+            firstAdd.observe(viewLifecycleOwner) {
+                greetingDialog.show()
             }
         }
     }

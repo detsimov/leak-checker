@@ -43,6 +43,9 @@ class TrackDataMasterViewModel(private val trackDataInteractor: ITrackDataIntera
     private val _isCanScan = MutableLiveData(false)
     val isCanScan = _isCanScan.asLiveData().distinctUntilChanged()
 
+    private val _firstAdd = SingleLiveData<Unit>()
+    val firstAdd = _firstAdd.asLiveData()
+
     private var scanJob: Job? = null
 
     init {
@@ -73,9 +76,10 @@ class TrackDataMasterViewModel(private val trackDataInteractor: ITrackDataIntera
             .onStart { _progress.value = true }
             .map { array -> array.map { TrackDataItem(it) } }
             .onEach {
-                if (it.isNotEmpty()) {
-                    _isCanScan.value = secureInteractor.scanCount == 0 && it.first().model.id == 1L
+                if(it.isNotEmpty() && it.first().model.id == 1L) {
+                    _firstAdd.call()
                 }
+                _isCanScan.value = secureInteractor.scanCount == 0 && it.isNotEmpty()
                 _trackData.value = it
                 _progress.value = false
             }
@@ -95,6 +99,7 @@ class TrackDataMasterViewModel(private val trackDataInteractor: ITrackDataIntera
         scanJob?.cancel()
         scanJob = launch {
             secureInteractor.fullScan(true)
+            _isCanScan.value = false
         }
     }
 

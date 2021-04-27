@@ -44,7 +44,7 @@ class SettingsMasterFragment : BaseFragment<SettingsMasterViewModel>(R.layout.fr
     private fun copyClipData(clipData: ClipData) {
         clipBoardManager.setPrimaryClip(clipData)
         for (item in 0 until clipData.itemCount) {
-            toast("Скопировано: ${clipData.getItemAt(item).text}")
+            toast("${clipData.getItemAt(item).text}")
         }
     }
 
