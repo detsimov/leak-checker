@@ -76,7 +76,7 @@ class TrackDataMasterViewModel(private val trackDataInteractor: ITrackDataIntera
             .onStart { _progress.value = true }
             .map { array -> array.map { TrackDataItem(it) } }
             .onEach {
-                if(it.isNotEmpty() && it.first().model.id == 1L) {
+                if(it.isNotEmpty() && it.first().model.id == 1L && secureInteractor.scanCount == 0) {
                     _firstAdd.call()
                 }
                 _isCanScan.value = secureInteractor.scanCount == 0 && it.isNotEmpty()
