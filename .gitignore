@@ -14,3 +14,5 @@
 .cxx
 local.properties
 app/build.gradle.kts
+.idea/codeStyles/Project.xml
+gradle/wrapper/gradle-wrapper.properties

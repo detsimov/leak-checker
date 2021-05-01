@@ -3,8 +3,8 @@ import org.gradle.api.artifacts.dsl.DependencyHandler
 const val kotlinVersion = "1.4.20"
 
 object App {
-    const val versionName = "0.5"
-    const val versionCode = 1
+    const val versionName = "0.5.5"
+    const val versionCode = 2
 }
 
 object AndroidSdk {
@@ -71,6 +71,7 @@ object Libraries {
         const val composeNavigation = "1.0.0-alpha07"
         const val activity = "1.3.0-alpha02"
         const val chucker = "3.4.0"
+        const val appmetrica = "3.18.0"
 
     }
 
@@ -104,6 +105,7 @@ object Libraries {
     private const val workManagerMultiProcess = "androidx.work:work-multiprocess:${Versions.workManager}"
     private const val workManagerKoin = "org.koin:koin-androidx-workmanager:${Versions.koin}"
     private const val leakCanary = "com.squareup.leakcanary:leakcanary-android:${Versions.leakCanary}"
+    private const val appmetrica = "com.yandex.android:mobmetricalib:${Versions.appmetrica}"
     private const val firebaseBom = "com.google.firebase:firebase-bom:${Versions.firebaseBom}"
     private const val firebaseAnalytics = "com.google.firebase:firebase-analytics-ktx"
     private const val firebaseCrashlytics = "com.google.firebase:firebase-crashlytics-ktx"
@@ -148,7 +150,8 @@ object Libraries {
         coreKtx, coroutinesAndroid, appCompat, material, liveDataKtx, viewBindingDelegate,
         koinAndroidFragment, koinAndroidViewModel, koinAndroidScope, cicerone, constraintLayout,
         decoro, swipeRefreshLayout, fastAdapter, fastAdapterBinding, fastAdapterDiff, admob,
-        notificationDslCore, notificationDslExt, workManager, workManagerMultiProcess, workManagerKoin
+        notificationDslCore, notificationDslExt, workManager, workManagerMultiProcess, workManagerKoin,
+        appmetrica
     )
 
     val androidComposeDependencies = listOf(

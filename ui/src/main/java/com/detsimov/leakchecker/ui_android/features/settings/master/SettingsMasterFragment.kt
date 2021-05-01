@@ -4,6 +4,9 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context.CLIPBOARD_SERVICE
 import android.os.Bundle
+import android.text.Html
+import android.text.method.LinkMovementMethod
+import android.text.method.MovementMethod
 import android.view.Gravity
 import android.view.View
 import android.widget.PopupMenu
@@ -26,6 +29,7 @@ class SettingsMasterFragment : BaseFragment<SettingsMasterViewModel>(R.layout.fr
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setUpConsent()
         setUpVersion()
         with(viewModel) {
             token.observe(viewLifecycleOwner) {
@@ -40,7 +44,7 @@ class SettingsMasterFragment : BaseFragment<SettingsMasterViewModel>(R.layout.fr
     private fun copyClipData(clipData: ClipData) {
         clipBoardManager.setPrimaryClip(clipData)
         for (item in 0 until clipData.itemCount) {
-            toast("Скопировано: ${clipData.getItemAt(item).text}")
+            toast("${clipData.getItemAt(item).text}")
         }
     }
 
@@ -61,6 +65,13 @@ class SettingsMasterFragment : BaseFragment<SettingsMasterViewModel>(R.layout.fr
     private fun setUpVersion() {
         viewBinding.tvDataAbout.apply {
             text = getString(R.string.settings_master_app_info, BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE)
+        }
+    }
+
+    private fun setUpConsent() {
+        viewBinding.tvConsent.apply {
+            text = Html.fromHtml(getString(R.string.settings_master_consent))
+            movementMethod = LinkMovementMethod.getInstance()
         }
     }
 

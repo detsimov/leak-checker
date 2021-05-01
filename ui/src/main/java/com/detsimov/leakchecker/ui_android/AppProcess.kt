@@ -2,7 +2,6 @@ package com.detsimov.leakchecker.ui_android
 
 import android.annotation.SuppressLint
 import android.app.ActivityManager
-import android.app.Application
 import android.content.Context
 
 object AppProcess {
@@ -12,9 +11,9 @@ object AppProcess {
     lateinit var value: String
         private set
 
-    fun init(application: Application) {
-        applicationContext = application.applicationContext
-        value = application.processName ?: ""
+    fun init(applicationContext: Context) {
+        this.applicationContext = applicationContext
+        value = applicationContext.processName ?: ""
     }
 
     fun isEqual(process: Process): Boolean = when (process) {
@@ -22,13 +21,15 @@ object AppProcess {
         Process.MAIN -> applicationContext.packageName == value
     }
 
+    fun isUndefined(): Boolean = Process.values().none { isEqual(it) }
+
     @SuppressLint("DefaultLocale")
-    fun resolveWorkManagerProcess(process: Process) : String {
-       return applicationContext.packageName.plus(":${process.name.toLowerCase()}")
+    fun resolveWorkManagerProcess(process: Process): String {
+        return applicationContext.packageName.plus(":${process.name.toLowerCase()}")
     }
 }
 
-val Application.processName: String?
+val Context.processName: String?
     get() {
         val manager = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
         for (processInfo in manager.runningAppProcesses) {

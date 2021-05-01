@@ -30,6 +30,7 @@
     <string name="track_data_create_title_data">Данные</string>
     <string name="track_data_master_title_dialog_clear_all">Трэкеры</string>
     <string name="track_data_create_btn_add">Добавить</string>
+    <string name="track_data_master_message_greeting_dialog">Вы добавили первую TrackData, каждые 24ч она будет проверяться нашим сервисом! Сейчас вы можете произвести ручное сканирование для ознакомления.</string>
     <string name="track_data_master_message_dialog_clear_all">Вы действительно хотите удалить все данные?</string>
     <string name="track_data_master_btn_ok_dialog_clear_all">Ок</string>
     <string name="track_data_master_btn_cancel_dialog_clear_all">Отмена</string>
@@ -42,10 +43,13 @@
     <string name="track_data_master_error_overflow">Максимально допустимое число трэкеров три</string>
     <string name="track_data_create_error_email">Email введён некорректно</string>
     <string name="track_data_create_error_phone">Номер телефона введён некорректно</string>
-
     <!-- Строки Splash Feature -->
-    <string name="splash_title">Leak checker\n version %1$s</string>
 
+    <string name="splash_title">Leak checker\n версия %1$s</string>
+    <string name="splash_consent_message_dialog_consent">Используя наше приложение вы соглашаетесь
+        с <![CDATA[<a href="https://leakchecker.ru/privacy.html">политикой конфиндециальности</a>]]> и
+        <![CDATA[<a href="https://leakchecker.ru/terms.html">условиями использования</a>]]></string>
+    <string name="splash_consent_btn_ok_dialog_consent">Хорошо</string>
 
     <!-- Строки Уведомлений -->
     <string name="notification_channel_name_analyse_scan">Уведомления о результатах анализа</string>
@@ -56,5 +60,6 @@
         <item>Item1</item>
     </array>
     <string name="track_data_create_warning_phone">Поддерживаются только Российские номера</string>
+    <string name="track_data_master_btn_scan">Сканировать</string>
 
 </resources>

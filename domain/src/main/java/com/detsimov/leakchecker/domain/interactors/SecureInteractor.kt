@@ -15,9 +15,13 @@ internal class SecureInteractor(
     private val secure: ISecure,
 ) : ISecureInteractor {
 
-    override suspend fun fullScan(): ScanDataModel = withContext(Dispatchers.IO) {
-        val trackData = trackDataRepository.fetch()
-            .filter { it.isCanScan() }
+    override val scanCount: Int
+        get() = secure.scanCount
+
+    override suspend fun fullScan(force: Boolean): ScanDataModel = withContext(Dispatchers.IO) {
+        val trackData = trackDataRepository.fetch().apply {
+            if (force) filter { it.isCanScan() }
+        }
         val leaks = leakRepository.fetch()
         val foundedLeaks = secure.scanLeaks(trackData to leaks).onEach {
             leakRepository.add(it)
@@ -25,6 +29,7 @@ internal class SecureInteractor(
         trackData.forEach {
             trackDataRepository.update(UpdateParams.LastCheck(System.currentTimeMillis(), it.id))
         }
+        secure.scanCount += 1
         ScanDataModel(foundedLeaks.size)
     }
 }

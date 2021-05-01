@@ -4,5 +4,7 @@ import com.detsimov.leakchecker.domain.models.ScanDataModel
 
 interface ISecureInteractor {
 
-    suspend fun fullScan() : ScanDataModel
+    val scanCount: Int
+
+    suspend fun fullScan(force: Boolean = false) : ScanDataModel
 }
