@@ -8,6 +8,7 @@ import com.detsimov.leakchecker.domain.interactors.i.ILeakInteractor
 import com.detsimov.leakchecker.ui_android.features.leak.item.LeakItem
 import com.detsimov.leakchecker.ui_android.firebase.Analytics
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 
 class LeakMasterViewModel(private val leakInteractor: ILeakInteractor) : BaseViewModel() {
 
@@ -19,15 +20,16 @@ class LeakMasterViewModel(private val leakInteractor: ILeakInteractor) : BaseVie
     }
 
     private fun subscribeToLeaks() {
-        leakInteractor.ownDataFlow
-            .onStart { _progress.value = true }
-            .map { array -> array.map { LeakItem(it) } }
-            .onEach {
-                _leaks.value = it
-                _progress.value = false
-            }
-            .handleErrors { handleError(it) }
-            .launchIn(this)
+        launch {
+            leakInteractor.ownDataFlow
+                .map { array -> array.map { LeakItem(it) } }
+                .onStart { _progress.value = true }
+                .catch { handleError(it) }
+                .collect {
+                    _leaks.value = it
+                    _progress.value = false
+                }
+        }
     }
 
     override fun handleError(throwable: Throwable) {

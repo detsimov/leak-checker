@@ -42,5 +42,4 @@ dependencies {
     implementation(project(":data-local"))
     implementation(project(":domain"))
     implementation(project(":ui"))
-
 }

@@ -21,8 +21,9 @@ internal class LeakRepository(database: Database) : ILeakRepository {
     override suspend fun delete(leakModel: LeakModel) =
         queries.delete(leakModel.id)
 
-    override suspend fun clear() =
+    override suspend fun clear() {
         queries.clear()
+    }
 
     override suspend fun fetch(fetchParams: FetchParams): List<LeakModel> =
         queries.all(leaksMapper).executeAsList()

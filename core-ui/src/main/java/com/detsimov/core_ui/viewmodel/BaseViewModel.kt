@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.annotation.CallSuper
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.detsimov.core_ui.BuildConfig
 import com.detsimov.core_ui.livedata.asLiveData
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
@@ -25,6 +26,9 @@ open class BaseViewModel : ViewModel(), CoroutineScope {
 
     @CallSuper
     protected open fun handleError(throwable: Throwable) {
+        if(BuildConfig.DEBUG) {
+            Log.e("ViewModel", "handle $throwable")
+        }
         _progress.value = false
         _error.value = throwable
     }

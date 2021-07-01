@@ -11,21 +11,21 @@ import kotlinx.coroutines.launch
 
 class SettingsMasterViewModel(private val tokenRepository: ITokenRepository) : BaseViewModel() {
 
-    private val _token = MutableLiveData<String?>()
-    val token = _token.asLiveData()
-
     private val _copyClipData = SingleLiveData<ClipData>()
     val copyClipData = _copyClipData.asLiveData()
 
-    override fun handleError(throwable: Throwable) {
-        super.handleError(throwable)
-        Analytics.recordException(throwable)
-    }
+    private val _token = MutableLiveData<String?>()
+    val token = _token.asLiveData()
 
     init {
         launch {
             _token.value = tokenRepository.get()
         }
+    }
+
+    override fun handleError(throwable: Throwable) {
+        super.handleError(throwable)
+        Analytics.recordException(throwable)
     }
 
     fun onCopyText(clipData: ClipData){

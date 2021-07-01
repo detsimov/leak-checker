@@ -14,13 +14,11 @@ internal class RetrofitProvider(private val okHttpClient: OkHttpClient) : Provid
         private const val contentType = "application/json"
     }
 
-    override fun get(): Retrofit =
-        Retrofit.Builder()
-            .client(okHttpClient)
-            .baseUrl(SERVER_URL)
-            .addConverterFactory(Json {
-                ignoreUnknownKeys = true
-            }.asConverterFactory(MediaType.get(contentType)))
-            .build()
-
+    override fun get(): Retrofit = Retrofit.Builder()
+        .client(okHttpClient)
+        .baseUrl(SERVER_URL)
+        .addConverterFactory(Json {
+            ignoreUnknownKeys = true
+        }.asConverterFactory(MediaType.get(contentType)))
+        .build()
 }

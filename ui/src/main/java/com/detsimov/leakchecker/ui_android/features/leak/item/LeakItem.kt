@@ -13,8 +13,7 @@ class LeakItem(model: LeakModel) : ModelAbstractBindingItem<LeakModel, ItemLeakB
 
     override var identifier: Long = model.id
 
-    override val type: Int
-        get() = R.id.item_leak_data
+    override val type: Int = R.id.item_leak_data
 
     override fun createBinding(inflater: LayoutInflater, parent: ViewGroup?): ItemLeakBinding =
         ItemLeakBinding.inflate(inflater, parent, false)
@@ -34,30 +33,29 @@ class LeakItem(model: LeakModel) : ModelAbstractBindingItem<LeakModel, ItemLeakB
 
     private fun ItemLeakBinding.bindDateOfLeak() {
         tvDate.apply {
-            if (model.lastBreach.isNullOrBlank().not()) {
-                text = context.getString(R.string.leak_item_breach, model.lastBreach)
-                isVisible = true
+            val date = if (model.lastBreach.isNullOrBlank().not()) {
+                context.getString(R.string.leak_item_breach, model.lastBreach)
             } else {
-                isVisible = false
+                ""
             }
+            text = date
+            isVisible = date.isNotEmpty()
         }
     }
 
     private fun ItemLeakBinding.bindSource() {
         tvSource.apply {
-            if(model.source.isNullOrBlank().not()) {
-                text = context.getString(R.string.leak_item_source, model.source)
-                isVisible = true
+            val source = if (model.source.isNullOrBlank().not()) {
+                context.getString(R.string.leak_item_source, model.source)
             } else {
-                isVisible = false
+                ""
             }
+            text = source
+            isVisible = source.isNotEmpty()
         }
     }
 
     private fun ItemLeakBinding.bindEmpty() {
-        val isEmpty = model.run { source.isNullOrBlank() && lastBreach.isNullOrBlank() }
-        tvEmpty.apply {
-            visibility = if (isEmpty) View.VISIBLE else View.GONE
-        }
+        tvEmpty.isVisible = model.run { source.isNullOrBlank() && lastBreach.isNullOrBlank() }
     }
 }
